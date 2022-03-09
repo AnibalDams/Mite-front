@@ -19,6 +19,7 @@
 			}
 			latestEpisodesAdded {
 				anime
+				animeName
 				thumbnail
 				episodeNumber
 			}
@@ -66,6 +67,8 @@
 	>
 	<MobilePopularAnimeList data={$all} />
 	{#if !$all.fetching}
+
+<div style="width:100%;height:50px;margin-bottom: 5px;margin-top: 10px;display: flex; justify-content: center; align-items: center; border-radius:5px; background: #590d08;"><p style="font-weight: 600; margin:5px;">Esta aplicaión esta aun en desarrollo asi que es posible que experimentes algunos errores en la misma, y la interfaz aun no tiene soporte para escritorio, recomendamos en su lugar usarla en dispositivos moviles.</p></div>
 		<footer
 			style="width: 100%;height: 100px; display: flex; align-items:center;justify-content: center;border-top: 1px solid #aaa;"
 		>
