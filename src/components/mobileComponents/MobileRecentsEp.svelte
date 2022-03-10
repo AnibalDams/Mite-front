@@ -1,6 +1,6 @@
 <script>
 	export let data = [];
-	console.log(data)
+	console.log(data);
 </script>
 
 <div class="scrollmenu">
@@ -13,7 +13,7 @@
 					<img src={episode.thumbnail} alt="episode thumbnail" loading="lazy" />
 					{#if episode.animeName && episode.animeName.length >= 25}
 						<span>{episode.animeName.substring(0, 25)}... - {episode.episodeNumber}</span>
-						{:else if episode.animeName === null}
+					{:else if episode.animeName === null}
 						<span>... - {episode.episodeNumber}</span>
 					{:else}
 						<span>{episode.animeName} - {episode.episodeNumber}</span>

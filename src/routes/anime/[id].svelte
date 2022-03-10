@@ -4,11 +4,11 @@
 
 	import { gql, operationStore, query } from '@urql/svelte';
 
-	let paramNumber = Number($page.params.id);
+	let animeId = $page.params.id;
 	const queryAnimes = gql`
 		query{
 			  
-			  findAnime(animeID:${paramNumber}){
+			  findAnime(animeID:${animeId}){
 			    message
 			    id
 			    name
@@ -20,7 +20,7 @@
 			    onGoing
 			    study
 			  }
-			  findEpisodes(animeID:${paramNumber}){
+			  findEpisodes(animeID:${animeId}){
 			    message
 			    episodeNumber
 			    thumbnail
