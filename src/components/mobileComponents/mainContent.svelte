@@ -8,9 +8,10 @@
 </script>
 
 <div
-	style="height: 400px;background-image: linear-gradient(to top,rgb(13,13,13) 30%,transparent  ),url({dataAnime.image}); background-position: center;background-size: cover;"
+	style=" height: 400px;background-image: linear-gradient(to top,rgb(13,13,13) 30%,transparent  ),url({dataAnime.image}); background-position: center;background-size: cover;"
 >
 	<NavBar />
 	<Info data={dataAnime} />
 	<EpisodesList data={dataEpisodes} animeId={dataAnime.id} />
 </div>
+

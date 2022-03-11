@@ -22,7 +22,7 @@
 					<span class="text">Episodio {episode.episodeNumber} </span>
 				</div>
 				<div
-					style="height: 1px;width: 100%; background-color:#666;margin-bottom: 2px;margin-top: 2px;"
+					style="height: 1px; background-color:#666;margin-bottom: 2px;margin-top: 2px;"
 				/>
 			</a>
 		{/each}
@@ -35,8 +35,9 @@
 	}
 	.list {
 		margin-top: 80px;
+		margin-right: 8px;
 
-		width: 100%;
+		max-width: 100%;
 	}
 	.item {
 		text-decoration: none;

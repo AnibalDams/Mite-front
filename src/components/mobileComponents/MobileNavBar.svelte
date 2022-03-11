@@ -20,8 +20,7 @@
 	}*/
 	nav {
 		background: rgb(13, 13, 13);
-		padding-left: 15px;
-		padding-right: 15px;
+		padding: 15px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;

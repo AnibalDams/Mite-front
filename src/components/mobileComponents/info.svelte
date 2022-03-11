@@ -31,7 +31,7 @@
 		color: #bbb;
 	}
 	.information {
-		width: 100%;
+		max-width: 100%;
 		margin: 10px;
 		margin-top: 30px;
 	}

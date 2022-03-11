@@ -7,6 +7,7 @@
 </nav>
 
 <style>
+
 	.navBar {
 		background-color: transparent;
 		width: 100%;

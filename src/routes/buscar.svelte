@@ -14,8 +14,8 @@
 			}
 		}
 	`;
-	const all = operationStore(queryAnimes, { searchIndex });
-	//
+	const all = operationStore(queryAnimes, { searchIndex },{ requestPolicy: 'cache-first' });
+	
 	query(all);
 
 	function onSubmit(e) {
@@ -28,7 +28,7 @@
 		}
 		searchIndex = data.search;
 		$all.variables = { searchIndex };
-		query(all);
+		all.reexecute({ requestPolicy: 'network-only' });
 	}
 </script>
 

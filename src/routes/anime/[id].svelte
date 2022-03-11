@@ -6,9 +6,9 @@
 
 	let animeId = $page.params.id;
 	const queryAnimes = gql`
-		query{
+		query ($animeId:String!){
 			  
-			  findAnime(animeID:${animeId}){
+			  findAnime(animeID:$animeId){
 			    message
 			    id
 			    name
@@ -20,16 +20,16 @@
 			    onGoing
 			    study
 			  }
-			  findEpisodes(animeID:${animeId}){
+			  findEpisodes(animeID:$animeId){
 			    message
 			    episodeNumber
 			    thumbnail
 			  }
 		}
 	`;
-	const all = operationStore(queryAnimes);
+	const all = operationStore(queryAnimes,{animeId});
 	query(all);
-	// console.log($all)
+	
 </script>
 
 <svelte:head>

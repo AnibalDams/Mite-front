@@ -2,7 +2,7 @@
 	import EpisodesList from '../../../../components/mobileComponents/episodeList.svelte';
 	import { gql, operationStore, query } from '@urql/svelte';
 	import { page } from '$app/stores';
-	let paramNumber = Number($page.params.animeId);
+	let animeId = $page.params.animeId;
 	let episodeNumber = Number($page.params.episodio) - 1;
 	$: episodeParam = Number($page.params.episodio);
 	$: if (episodeParam) {
@@ -10,14 +10,14 @@
 	}
 	let urls = [];
 	const queryAnimes = gql`
-		query{
+		query ($animeId:String!){
 			  
-			  findAnime(animeID:${paramNumber}){
+			  findAnime(animeID:$animeId){
 			    message
 			    id
 			    name
 			  }
-			  findEpisodes(animeID:${paramNumber}){
+			  findEpisodes(animeID:$animeId){
 			    message
 			    episodeNumber
 			    thumbnail
@@ -28,7 +28,7 @@
 		}
 	`;
 
-	const all = operationStore(queryAnimes);
+	const all = operationStore(queryAnimes,{animeId});
 
 	query(all);
 
