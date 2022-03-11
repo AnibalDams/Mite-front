@@ -4,6 +4,7 @@
 	import MobileRecentsEps from './MobileRecentsEp.svelte';
 	import MobileAnimeCoverList from './MobileAnimesCoverList.svelte';
 	import MobilePopularAnimeList from './MobilePopularAnimeList.svelte';
+	import Loading from './loading.svelte'
 	import { gql, operationStore, query } from '@urql/svelte';
 
 	let genres = [];
@@ -48,7 +49,7 @@
 	<title>Mite - Anime online en HD y con subtítulos en español</title>
 </svelte:head>
 {#if $all.fetching}
-	<div class="loading" />
+<Loading/>
 {:else}
 	<MobileNavBar />
 	<MobileGenreList {genres} />
@@ -86,24 +87,3 @@
 		</footer>
 	{/if}
 {/if}
-
-<style>
-	.loading {
-		display: inline-block;
-		margin-left: 50%;
-		margin-top: 100px;
-		padding: 20px;
-		border: 1px solid #aaa;
-		border-radius: 5px;
-
-		animation: loading infinite 2s ease-in-out;
-	}
-	@keyframes loading {
-		from {
-			transform: rotate(0);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
-</style>

@@ -1,6 +1,8 @@
 <script>
 	import AnimeList from '../components/mobileComponents/AnimeList.svelte';
 	import { gql, operationStore, query } from '@urql/svelte';
+	import Loading from '../components/mobileComponents/loading.svelte'
+
 
 	let searchIndex = '';
 	const queryAnimes = gql`
@@ -44,7 +46,7 @@
 </form>
 
 {#if $all.fetching}
-	<div class="loading" />
+	<Loading />
 {:else}
 	<AnimeList data={$all} dataType="search" />
 {/if}
@@ -83,22 +85,5 @@
 		opacity: 0.5;
 	}
 
-	.loading {
-		display: inline-block;
-		margin-left: 50%;
-		margin-top: 100px;
-		padding: 20px;
-		border: 1px solid #aaa;
-		border-radius: 5px;
-
-		animation: loading infinite 2s ease-in-out;
-	}
-	@keyframes loading {
-		from {
-			transform: rotate(0);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
+	
 </style>
