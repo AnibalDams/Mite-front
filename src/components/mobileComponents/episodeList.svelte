@@ -21,9 +21,7 @@
 					/>
 					<span class="text">Episodio {episode.episodeNumber} </span>
 				</div>
-				<div
-					style="height: 1px; background-color:#666;margin-bottom: 2px;margin-top: 2px;"
-				/>
+				<div style="height: 1px; background-color:#666;margin-bottom: 2px;margin-top: 2px;" />
 			</a>
 		{/each}
 	</section>

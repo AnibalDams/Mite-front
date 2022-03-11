@@ -1,8 +1,7 @@
 <script>
 	import AnimeList from '../components/mobileComponents/AnimeList.svelte';
 	import { gql, operationStore, query } from '@urql/svelte';
-	import Loading from '../components/mobileComponents/loading.svelte'
-
+	import Loading from '../components/mobileComponents/loading.svelte';
 
 	let searchIndex = '';
 	const queryAnimes = gql`
@@ -16,8 +15,8 @@
 			}
 		}
 	`;
-	const all = operationStore(queryAnimes, { searchIndex },{ requestPolicy: 'cache-first' });
-	
+	const all = operationStore(queryAnimes, { searchIndex }, { requestPolicy: 'cache-first' });
+
 	query(all);
 
 	function onSubmit(e) {
@@ -84,6 +83,4 @@
 	.icon-button:active {
 		opacity: 0.5;
 	}
-
-	
 </style>

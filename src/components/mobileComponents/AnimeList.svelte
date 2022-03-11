@@ -45,13 +45,15 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		width: 100%;
+		height: fit-content;
+		max-width: 100%;
 		justify-content: center;
 		margin-top: 20px;
 	}
 	.item {
 		display: flex;
 		flex-direction: column;
+
 		margin-top: 5px;
 		margin-bottom: 15px;
 		width: 150px;

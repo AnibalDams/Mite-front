@@ -10,25 +10,24 @@
 	}
 	let urls = [];
 	const queryAnimes = gql`
-		query ($animeId:String!){
-			  
-			  findAnime(animeID:$animeId){
-			    message
-			    id
-			    name
-			  }
-			  findEpisodes(animeID:$animeId){
-			    message
-			    episodeNumber
-			    thumbnail
-			    servers{
-          			url
-        		}
-			  }
+		query ($animeId: String!) {
+			findAnime(animeID: $animeId) {
+				message
+				id
+				name
+			}
+			findEpisodes(animeID: $animeId) {
+				message
+				episodeNumber
+				thumbnail
+				servers {
+					url
+				}
+			}
 		}
 	`;
 
-	const all = operationStore(queryAnimes,{animeId});
+	const all = operationStore(queryAnimes, { animeId });
 
 	query(all);
 

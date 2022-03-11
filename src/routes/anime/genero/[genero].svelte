@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { gql, operationStore, query } from '@urql/svelte';
 	import AnimeList from '../../../components/mobileComponents/AnimeList.svelte';
+	import Loading from '../../../components/mobileComponents/loading.svelte';
 	let genre = $page.params.genero;
 
 	const queryAnimes = gql`
@@ -32,14 +33,14 @@
 <h3 class="genre">{genre}</h3>
 
 {#if $all.fetching}
-	<div class="loading" />
+	<Loading />
 {:else}
 	<AnimeList data={$all} dataType="findAnimeByGenre" />
 {/if}
 
 <style type="text/css">
 	.navBar {
-		width: 100%;
+		max-width: 100%;
 		height: 30px;
 		margin: 20px;
 	}
@@ -52,22 +53,5 @@
 	.genre {
 		margin: 20px;
 		font-size: 1.5rem;
-	}
-	.loading {
-		display: inline-block;
-		margin-left: 50%;
-		margin-top: 100px;
-		padding: 20px;
-		border: 1px solid #aaa;
-		border-radius: 5px;
-		animation: loading infinite 2s ease-in-out;
-	}
-	@keyframes loading {
-		from {
-			transform: rotate(0);
-		}
-		to {
-			transform: rotate(360deg);
-		}
 	}
 </style>

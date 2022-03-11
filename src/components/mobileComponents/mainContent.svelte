@@ -14,4 +14,3 @@
 	<Info data={dataAnime} />
 	<EpisodesList data={dataEpisodes} animeId={dataAnime.id} />
 </div>
-
