@@ -1,51 +1,43 @@
-<script >
+<script>
 	let text = `La ficción gira en torno a Ai Ooto, una chica de 14 años que durante su paseo de medianoche ecucha una voz que le lleva ante un huevo. Allí, con el huevo en la mano, la voz le insinúa que puede cambiar el futuro justo en ese mismo momento si rompe el huevo.
 
 
 
-`
-	
+`;
 </script>
-
-
 
 <main class="preview-anime-information">
 	<h2 class="anime-title">Wonder Egg Priority</h2>
 	<div class="details">
 		<span id="type" class="badge"><span class="material-icons-round">live_tv</span>Anime</span>
-		<span id="study" class="badge"><span class="material-icons-round">
-edit
-</span>
+		<span id="study" class="badge"
+			><span class="material-icons-round"> edit </span>
 
-MAPPA</span>
-		<span id="releaseText" class="badge"><span class="material-icons-round">
-event
-</span>
-2021</span>
+			MAPPA</span
+		>
+		<span id="releaseText" class="badge"
+			><span class="material-icons-round"> event </span>
+			2021</span
+		>
 	</div>
-	{#if text.length >=800}
-		<p class="synopsis">{text.substring(0,800)}...</p>
-		{:else}
+	{#if text.length >= 800}
+		<p class="synopsis">{text.substring(0, 800)}...</p>
+	{:else}
 		<p class="synopsis">{text}</p>
-
-
 	{/if}
 	<div class="actions">
-		<a href="/anime/dadcd59e-74cb-429e-968f-e2a0e8c13886" class="button" id="more-details"><span class="material-icons-round" style="color:inherit;">
-add
-</span>Mas detalles 
-</a>
+		<a href="/anime/dadcd59e-74cb-429e-968f-e2a0e8c13886" class="button" id="more-details"
+			><span class="material-icons-round" style="color:inherit;"> add </span>Mas detalles
+		</a>
 
-		<a href="/anime/episodio/dadcd59e-74cb-429e-968f-e2a0e8c13886/1" class="button" id="watch-now"><span class="material-icons-round">
-play_arrow
-</span>Ver ahora</a>
+		<a href="/anime/episodio/dadcd59e-74cb-429e-968f-e2a0e8c13886/1" class="button" id="watch-now"
+			><span class="material-icons-round"> play_arrow </span>Ver ahora</a
+		>
 	</div>
-
 </main>
 
-
-<style >
-	.preview-anime-information{
+<style>
+	.preview-anime-information {
 		max-width: 50%;
 		display: flex;
 		justify-content: flex-start;
@@ -55,41 +47,38 @@ play_arrow
 		margin-right: 40px;
 		flex-direction: column;
 	}
-	.anime-title{
-
+	.anime-title {
 		margin-bottom: 20px;
 		font-size: 3rem;
 		font-weight: 500;
 	}
-	.synopsis{
+	.synopsis {
 		font-size: 1.2rem;
 		font-weight: 300;
 		color: #eee;
 	}
-	.details{
+	.details {
 		margin-bottom: 30px;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 	}
-	#type{
+	#type {
 		margin-right: 10px;
 	}
-	#study{
-	
+	#study {
 		margin-right: 10px;
 		margin-left: 10px;
 	}
-	#releaseText{
-
+	#releaseText {
 		margin-right: 10px;
-		margin-left: 10px;	
+		margin-left: 10px;
 	}
-	.actions{
+	.actions {
 		display: flex;
 		margin-top: 30px;
 	}
-	.button{
+	.button {
 		display: flex;
 		align-items: center;
 
@@ -102,22 +91,21 @@ play_arrow
 		font-weight: bold;
 		text-decoration: none;
 	}
-	.button:hover{
+	.button:hover {
 		opacity: 0.5;
 	}
-	.button span.material-icons-round{
+	.button span.material-icons-round {
 		margin-right: 10px;
 	}
-	#more-details{
+	#more-details {
 		background: #fff;
 		color: #111;
 		margin-right: 10px;
 	}
-	#watch-now{
+	#watch-now {
 		background-color: #1f1f1f;
 	}
-	.badge{
-
+	.badge {
 		display: flex;
 		font-weight: 300;
 		font-size: 1rem;
@@ -127,7 +115,7 @@ play_arrow
 		border-radius: 5px;
 		border: 1px solid #666;
 	}
-	.badge span.material-icons-round{
+	.badge span.material-icons-round {
 		margin-right: 5px;
 	}
 </style>
