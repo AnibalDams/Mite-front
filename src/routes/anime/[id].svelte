@@ -32,11 +32,21 @@
 </script>
 
 <svelte:head>
+		
 	{#if $all.fetching}
 		<title>Cargando...</title>
 	{:else if $all.data['findAnime'].message === 'El anime solicitado no existe.'}
 		<title>El anime solicitado no existe.</title>
 	{:else}
+			<meta
+			name="description"
+			content={`${$all.data['findAnime'].synopsis}` }
+		/>
+		
+		<meta
+			name="keywords"
+			content={`Anime, mite, Mite, ver anime, ver anime online, ver anime gratis en espanol, ver anime top, ver anime en espanol latino, ver anime gratis online, anime series, anime, ver ${$all.data['findAnime'].name},ver ${$all.data['findAnime'].name} subtitulado, ver ${$all.data['findAnime'].name} sub español, ${$all.data['findAnime'].name} de que se trata, ${$all.data['findAnime'].name} final, ${$all.data['findAnime'].name} episodios`}
+		/>
 		<title>Ver {$all.data['findAnime'].name} - Mite</title>
 	{/if}
 </svelte:head>
