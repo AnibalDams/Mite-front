@@ -19,7 +19,7 @@
 
 <svelte:window bind:innerWidth={width} />
 
-{#if width > 912}
+{#if width > 1020}
 	<HomePageDesktop />
 {:else}
 	<HomePageMobile />

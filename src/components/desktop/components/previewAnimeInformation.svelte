@@ -1,36 +1,32 @@
 <script>
-	let text = `La ficción gira en torno a Ai Ooto, una chica de 14 años que durante su paseo de medianoche ecucha una voz que le lleva ante un huevo. Allí, con el huevo en la mano, la voz le insinúa que puede cambiar el futuro justo en ese mismo momento si rompe el huevo.
-
-
-
-`;
+export let animeData;
 </script>
 
 <main class="preview-anime-information">
-	<h2 class="anime-title">Wonder Egg Priority</h2>
+	<h2 class="anime-title">{animeData.name}</h2>
 	<div class="details">
-		<span id="type" class="badge"><span class="material-icons-round">live_tv</span>Anime</span>
+		<span id="type" class="badge"><span class="material-icons-round">live_tv</span>{animeData.type}</span>
 		<span id="study" class="badge"
 			><span class="material-icons-round"> edit </span>
 
-			MAPPA</span
+			{animeData.study}</span
 		>
 		<span id="releaseText" class="badge"
 			><span class="material-icons-round"> event </span>
-			2021</span
+			{animeData.releaseDate}</span
 		>
 	</div>
-	{#if text.length >= 800}
-		<p class="synopsis">{text.substring(0, 800)}...</p>
+	{#if animeData.synopsis.length >= 800}
+		<p class="synopsis">{animeData.synopsis.substring(0, 800)}...</p>
 	{:else}
-		<p class="synopsis">{text}</p>
+		<p class="synopsis">{animeData.synopsis}</p>
 	{/if}
 	<div class="actions">
-		<a href="/anime/dadcd59e-74cb-429e-968f-e2a0e8c13886" class="button" id="more-details"
-			><span class="material-icons-round" style="color:inherit;"> add </span>Mas detalles
+		<a href={`/anime/${animeData.id}`} class="button" id="more-details"
+			><span class="material-icons-round" style="color:inherit;"> add </span>Más detalles
 		</a>
 
-		<a href="/anime/episodio/dadcd59e-74cb-429e-968f-e2a0e8c13886/1" class="button" id="watch-now"
+		<a href={`/anime/episodio/${animeData.id}/1`} class="button" id="watch-now"
 			><span class="material-icons-round"> play_arrow </span>Ver ahora</a
 		>
 	</div>
