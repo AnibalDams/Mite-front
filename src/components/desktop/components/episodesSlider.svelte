@@ -64,8 +64,8 @@
     spaceBetween={50}
     slidesPerView={4}
      navigation
-    on:slideChange={() => console.log('slide change')}
-    on:swiper={(e) => console.log(e.detail[0])}
+    on:slideChange={() => console.log('')}
+    on:swiper={(e) => console.log('')}
     style="margin:30px;"
   >
 

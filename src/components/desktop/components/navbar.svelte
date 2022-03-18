@@ -1,5 +1,5 @@
 <nav class="navBar">
-	<img src={'https://mite-api.herokuapp.com/img/wonder_egg_priority_10.png'} class="brand-logo" />
+	<img src={''} class="brand-logo" />
 	<form class="search-form">
 		<input type="text" name="search" class="input" placeholder="Buscar" />
 		<button class="search-button" type="submit"
