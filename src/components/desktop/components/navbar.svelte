@@ -1,12 +1,12 @@
 <script type="text/javascript">
-	let search = ""
+	let search = '';
 </script>
 
-
 <nav class="navBar">
-		<a href="/" class="brand-logo">Mite</a>
-	<div class="search-form"><input type="text" bind:value={search} name="search" class="input" placeholder="Buscar" />
-				<a class="search-button" href={`/anime/buscar/${search}`} 
+	<a href="/" class="brand-logo">Mite</a>
+	<div class="search-form">
+		<input type="text" bind:value={search} name="search" class="input" placeholder="Buscar" />
+		<a class="search-button" href={`/anime/buscar/${search}`}
 			><span class="material-icons-round">search</span></a
 		>
 	</div>
@@ -59,8 +59,8 @@
 		border-top-right-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}
-	.search-form:hover{
-		opacity: .95;
+	.search-form:hover {
+		opacity: 0.95;
 	}
 	.search-button:hover {
 		opacity: 0.5;

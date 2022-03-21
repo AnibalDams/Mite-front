@@ -29,7 +29,7 @@
 			<span>{anime.study}</span>
 		</div>
 		<span style="font-size: 1.8rem; font-weight: bold; margin-top: 50px;">Episodios</span>
-		<EpisodesList {episodes}/>
+		<EpisodesList {episodes} />
 	</div>
 </section>
 

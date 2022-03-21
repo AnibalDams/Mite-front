@@ -1,6 +1,6 @@
 <script type="text/javascript">
-	import SearchPage from '../../../components/desktop/pages/search.svelte'
-	import Loading from '../../../components/mobileComponents/loading.svelte'
+	import SearchPage from '../../../components/desktop/pages/search.svelte';
+	import Loading from '../../../components/mobileComponents/loading.svelte';
 	import { gql, operationStore, query } from '@urql/svelte';
 
 	import { page } from '$app/stores';
@@ -22,21 +22,14 @@
 	const all = operationStore(queryAnimes, { searchIndex }, { requestPolicy: 'cache-first' });
 
 	query(all);
-	console.log($all)
-
-
+	console.log($all);
 </script>
+
 <svelte:head>
 	<title>Buscar - {searchIndex}</title>
 </svelte:head>
 {#if $all.fetching === false}
-
-
-<SearchPage searchIndex={searchIndex} data={$all.data['search']}/>
-
-
-
+	<SearchPage {searchIndex} data={$all.data['search']} />
 {:else}
-<Loading/>
-
+	<Loading />
 {/if}

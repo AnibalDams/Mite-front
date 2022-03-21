@@ -2,23 +2,23 @@
 	export let episodes;
 </script>
 
-
-
 <div class="list">
-	{#each episodes as episode}
-
-		<a href={`/anime/episodio/${episode.anime}/${episode.episodeNumber}`} class="item">
-		<img src={episode.thumbnail} class="thumbnail" />
-		<span class="episodeDescription">Episodio: {episode.episodeNumber} - {episode.episodeName}</span>
-	</a>
-
-	{/each}
+	{#if episodes.length > 0}
+		{#each episodes as episode}
+			<a href={`/anime/episodio/${episode.anime}/${episode.episodeNumber}`} class="item">
+				<img src={episode.thumbnail} class="thumbnail" />
+				<span class="episodeDescription"
+					>Episodio: {episode.episodeNumber} - {episode.episodeName}</span
+				>
+			</a>
+		{/each}
+	{:else}
+		<div />
+	{/if}
 </div>
 
-
-
 <style type="text/css">
-	.list{
+	.list {
 		margin-top: 30px;
 		margin-bottom: 30px;
 		max-width: 100%;
@@ -26,22 +26,21 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
 		grid-gap: 3rem;
-		
 	}
-	
-	.item{
+
+	.item {
 		transition: 0.2;
 		text-decoration: none;
 		cursor: pointer;
 		position: relative;
 	}
-	
-	.item .thumbnail{
+
+	.item .thumbnail {
 		width: 300px;
 		height: 200px;
 		object-fit: cover;
 	}
-	.item .episodeDescription{
+	.item .episodeDescription {
 		display: inline-block;
 		font-weight: 300;
 		margin-top: 10px;
