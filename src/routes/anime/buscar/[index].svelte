@@ -22,7 +22,6 @@
 	const all = operationStore(queryAnimes, { searchIndex }, { requestPolicy: 'cache-first' });
 
 	query(all);
-	console.log($all);
 </script>
 
 <svelte:head>

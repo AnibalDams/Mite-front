@@ -1,9 +1,10 @@
 <script type="text/javascript">
 	export let episodes;
+	console.log(episodes)
 </script>
 
 <div class="list">
-	{#if episodes.length > 0}
+	{#if episodes[0].message !="Este anime no cuenta con ningun episodio aun."}
 		{#each episodes as episode}
 			<a href={`/anime/episodio/${episode.anime}/${episode.episodeNumber}`} class="item">
 				<img src={episode.thumbnail} class="thumbnail" />
@@ -13,7 +14,10 @@
 			</a>
 		{/each}
 	{:else}
-		<div />
+		<span
+			style="display: inline-block;width: 100%;margin-top: 40px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
+			>Aun no hay ningun episodio subido.</span
+		>
 	{/if}
 </div>
 
