@@ -5,30 +5,22 @@
 <section class="list">
 	{#each data as anime}
 		<div class="item" title={anime.synopsis}>
-		<a href={`/anime/${anime.id}`} class="cover">
-			<img
-				src={anime.cover}
-				class="cover-img"
-				loading="lazy"
-			/>
-			<p class="gradient" />
-			<div class="actions">
-				<a
-					href={`/anime/${anime.id}`}
-					class="material-icons-round button"
-				>
-					play_circle_outline
-				</a>
+			<a href={`/anime/${anime.id}`} class="cover">
+				<img src={anime.cover} class="cover-img" loading="lazy" />
+				<p class="gradient" />
+				<div class="actions">
+					<a href={`/anime/${anime.id}`} class="material-icons-round button">
+						play_circle_outline
+					</a>
+				</div>
+			</a>
+			<div class="info">
+				<a href={`/anime/${anime.id}`} class="title">{anime.name}</a>
+				<span class="text-inf">{anime.type}</span>
+				<div class="dot" />
+				<span class="text-inf">{anime.releaseDate}</span>
 			</div>
-		</a>
-		<div class="info">
-			<a href={`/anime/${anime.id}`} class="title">{anime.name}</a>
-			<span class="text-inf">{anime.type}</span>
-			<div class="dot" />
-			<span class="text-inf">{anime.releaseDate}</span>
 		</div>
-	</div>
-
 	{/each}
 </section>
 
@@ -40,7 +32,6 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
 		grid-gap: 1rem;
-		flex-wrap: wrap;
 	}
 	.item {
 		width: 210px;
@@ -50,13 +41,12 @@
 		display: flex;
 		flex-direction: column;
 	}
-		.item .cover {
-			position: relative;
+	.item .cover {
+		position: relative;
 		cursor: pointer;
 		transition: 0.5;
-
 	}
-	.item .cover:after{
+	.item .cover:after {
 		content: '';
 		width: 210px;
 		visibility: hidden;
@@ -68,7 +58,8 @@
 		bottom: 0;
 		background: rgba(10, 10, 10, 0.5);
 	}
-	.item:hover .cover:after ,.item:hover .actions .button{
+	.item:hover .cover:after,
+	.item:hover .actions .button {
 		visibility: visible;
 		opacity: 1;
 	}

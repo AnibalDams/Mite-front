@@ -1,11 +1,13 @@
 <script>
-export let animeData;
+	export let animeData;
 </script>
 
 <main class="preview-anime-information">
 	<h2 class="anime-title">{animeData.name}</h2>
 	<div class="details">
-		<span id="type" class="badge"><span class="material-icons-round">live_tv</span>{animeData.type}</span>
+		<span id="type" class="badge"
+			><span class="material-icons-round">live_tv</span>{animeData.type}</span
+		>
 		<span id="study" class="badge"
 			><span class="material-icons-round"> edit </span>
 

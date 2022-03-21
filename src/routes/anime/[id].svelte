@@ -1,10 +1,11 @@
 <script>
 	import AnimeDetails from '../../components/mobileComponents/animeDetails.svelte';
+	import AnimeDetailsD from '../../components/desktop/pages/animeDetails.svelte';
 	import Loading from '../../components/mobileComponents/loading.svelte';
 	import { page } from '$app/stores';
 
 	import { gql, operationStore, query } from '@urql/svelte';
-
+	let width;
 	let animeId = $page.params.id;
 	const queryAnimes = gql`
 		query ($animeId: String!) {
@@ -19,8 +20,11 @@
 				releaseDate
 				onGoing
 				study
+				type
 			}
 			findEpisodes(animeID: $animeId) {
+				anime
+				episodeName
 				message
 				episodeNumber
 				thumbnail
@@ -30,6 +34,8 @@
 	const all = operationStore(queryAnimes, { animeId });
 	query(all);
 </script>
+
+<svelte:window bind:innerWidth={width} />
 
 <svelte:head>
 	{#if $all.fetching}
@@ -56,6 +62,8 @@
 			>El anime solicitado no existe <a href="/">Vuelve al inicio</a></span
 		>
 	</div>
+{:else if width > 1020}
+	<AnimeDetailsD anime={$all.data['findAnime']} episodes={$all.data['findEpisodes']} />
 {:else}
 	<AnimeDetails data={$all} />
 {/if}

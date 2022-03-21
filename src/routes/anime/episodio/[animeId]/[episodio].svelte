@@ -30,8 +30,8 @@
 	const all = operationStore(queryAnimes, { animeId });
 
 	query(all);
-
-	$: if ($all.fetching === false) {
+	console.log($all)
+	$: if ($all.fetching === false && $all.data['findAnime'].message != "El anime solicitado no existe.") {
 		$all.data['findEpisodes'].forEach((el) => {
 			urls = [...urls, el.servers[0].url];
 		});
@@ -49,6 +49,16 @@
 {#if $all.fetching}
 	<div />
 {:else}
+
+	{#if $all.data['findAnime'].message === "El anime solicitado no existe."}
+		<div style="width:100%; display: flex; justify-content:center;align-items: center;">
+		<span
+			style="display: inline-block;margin-top: 270px;margin-left: 10px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
+			>El anime solicitado no existe <a href="/" style="text-decoration: underline;">Vuelve al inicio</a></span
+		>
+	</div>
+	{:else}
+
 	<main>
 		<nav class="navBar">
 			<a href={`/anime/${$page.params.animeId}`} style="display: flex; align-items: center;">
@@ -106,6 +116,8 @@
 		<span class="moreText">Episodios de {$all.data['findAnime'].name}</span>
 		<EpisodesList data={$all.data['findEpisodes']} animeId={$all.data['findAnime'].id} />
 	</main>
+
+	{/if}
 {/if}
 
 <style>
