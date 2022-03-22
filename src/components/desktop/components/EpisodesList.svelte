@@ -1,10 +1,10 @@
 <script type="text/javascript">
 	export let episodes;
-	console.log(episodes)
+	console.log(episodes);
 </script>
 
 <div class="list">
-	{#if episodes[0].message !="Este anime no cuenta con ningun episodio aun."}
+	{#if episodes[0].message != 'Este anime no cuenta con ningun episodio aun.'}
 		{#each episodes as episode}
 			<a href={`/anime/episodio/${episode.anime}/${episode.episodeNumber}`} class="item">
 				<img src={episode.thumbnail} class="thumbnail" />
@@ -43,6 +43,7 @@
 		width: 300px;
 		height: 200px;
 		object-fit: cover;
+		border-radius: 5px;
 	}
 	.item .episodeDescription {
 		display: inline-block;

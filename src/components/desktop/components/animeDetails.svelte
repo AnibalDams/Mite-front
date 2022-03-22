@@ -5,11 +5,12 @@
 	export let episodes;
 </script>
 
-<NavBar />
 <section class="information">
 	<div class="left">
 		<img src={anime.cover} class="cover" />
-		<a href={`/anime/episodio/${anime.id}/1`} class="button">Ver episodio 1</a>
+		{#if episodes[0].message != 'Este anime no cuenta con ningun episodio aun.'}
+			<a href={`/anime/episodio/${anime.id}/1`} class="button">Ver episodio 1</a>
+		{/if}
 	</div>
 	<div class="right">
 		<h2 class="title">{anime.name}</h2>

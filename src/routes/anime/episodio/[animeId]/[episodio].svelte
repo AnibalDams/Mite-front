@@ -1,7 +1,10 @@
 <script type="text/javascript">
 	import EpisodesList from '../../../../components/mobileComponents/episodeList.svelte';
+	import EpisodeD from '../../../../components/desktop/pages/episode.svelte';
+
 	import { gql, operationStore, query } from '@urql/svelte';
 	import { page } from '$app/stores';
+	let haveEpisode;
 	let animeId = $page.params.animeId;
 	let episodeNumber = Number($page.params.episodio) - 1;
 	$: episodeParam = Number($page.params.episodio);
@@ -9,16 +12,27 @@
 		episodeNumber = episodeParam - 1;
 	}
 	let urls = [];
+	let width;
 	const queryAnimes = gql`
 		query ($animeId: String!) {
 			findAnime(animeID: $animeId) {
 				message
 				id
 				name
+				synopsis
+				image
+				cover
+				genres
+				releaseDate
+				onGoing
+				study
+				type
 			}
 			findEpisodes(animeID: $animeId) {
 				message
+				anime
 				episodeNumber
+				episodeName
 				thumbnail
 				servers {
 					url
@@ -32,14 +46,26 @@
 	query(all);
 	console.log($all);
 	$: if (
+		!$all.fetching &&
+		$all.data['findEpisodes'][0].message === 'Este anime no cuenta con ningun episodio aun.'
+	) {
+		haveEpisode = false;
+	} else {
+		haveEpisode = true;
+	}
+
+	$: if (
 		$all.fetching === false &&
-		$all.data['findAnime'].message != 'El anime solicitado no existe.'
+		$all.data['findAnime'].message != 'El anime solicitado no existe.' &&
+		$all.data['findEpisodes'][0].message != 'Este anime no cuenta con ningun episodio aun.'
 	) {
 		$all.data['findEpisodes'].forEach((el) => {
 			urls = [...urls, el.servers[0].url];
 		});
 	}
 </script>
+
+<svelte:window bind:innerWidth={width} />
 
 <svelte:head>
 	{#if !$all.fetching}
@@ -51,7 +77,7 @@
 
 {#if $all.fetching}
 	<div />
-{:else if $all.data['findAnime'].message === 'El anime solicitado no existe.'}
+{:else if !$all.fetching && $all.data['findAnime'].message === 'El anime solicitado no existe.'}
 	<div style="width:100%; display: flex; justify-content:center;align-items: center;">
 		<span
 			style="display: inline-block;margin-top: 270px;margin-left: 10px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
@@ -60,6 +86,22 @@
 			></span
 		>
 	</div>
+{:else if !haveEpisode}
+	<div style="width:100%; display: flex; justify-content:center;align-items: center;">
+		<span
+			style="display: inline-block;margin-top: 270px;margin-left: 10px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
+			>{$all.data['findAnime'].name} no cuenta con ningun episodio aun.
+			<a href={`/anime/${$all.data['findAnime'].id}`} style="text-decoration: underline;">Volver.</a
+			></span
+		>
+	</div>
+{:else if width > 1020}
+	<EpisodeD
+		{urls}
+		{episodeNumber}
+		anime={$all.data['findAnime']}
+		episodes={$all.data['findEpisodes']}
+	/>
 {:else}
 	<main>
 		<nav class="navBar">
