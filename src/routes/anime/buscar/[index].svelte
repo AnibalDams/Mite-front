@@ -26,6 +26,7 @@
 
 <svelte:head>
 	<title>Buscar - {searchIndex}</title>
+	<link rel="alternate" media="only screen and (max-width: 1020px)" href="https://mite-jade.vercel.app/buscar">
 </svelte:head>
 {#if $all.fetching === false}
 	<SearchPage {searchIndex} data={$all.data['search']} />

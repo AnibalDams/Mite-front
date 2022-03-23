@@ -44,12 +44,16 @@
 		<title>El anime solicitado no existe.</title>
 	{:else}
 		<meta name="description" content={`${$all.data['findAnime'].synopsis}`} />
-
+		<meta property="og:title" content={`Ver Anime ${$all.data['findAnime'].name} Online Gratis en HD - Mite`}>
+		<meta property="og:url" content={`https://mite-jade.vercel.app/anime/${$all.data['findAnime'].id}`}>
+		<meta property="og:image" content={$all.data['findAnime'].cover}>
+		<meta property="og:description" content={$all.data['findAnime'].synopsis}>
+		<link rel="canonical" href={`https://mite-jade.vercel.app/anime/${$all.data['findAnime'].id}`}>
 		<meta
 			name="keywords"
 			content={`Anime, mite, Mite, ver anime, ver anime online, ver anime gratis en espanol, ver anime top, ver anime en espanol latino, ver anime gratis online, anime series, anime, ver ${$all.data['findAnime'].name},ver ${$all.data['findAnime'].name} subtitulado, ver ${$all.data['findAnime'].name} sub español, ${$all.data['findAnime'].name} de que se trata, ${$all.data['findAnime'].name} final, ${$all.data['findAnime'].name} episodios`}
 		/>
-		<title>Ver {$all.data['findAnime'].name} - Mite</title>
+		<title>Ver Anime {$all.data['findAnime'].name} Online Gratis en HD - Mite</title>
 	{/if}
 </svelte:head>
 

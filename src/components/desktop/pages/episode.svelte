@@ -5,6 +5,7 @@
 	export let urls;
 	export let animeId;
 	export let episodeNumber;
+	export let episodeParam;
 	export let anime;
 	export let episodes;
 </script>
@@ -17,6 +18,7 @@
 >
 	<NavBar />
 	{#if urls.length > 0}
+		<h1 style="margin-left:50px;font-size: 3.5rem;margin-top: 20px">{anime.name} episodio {episodeParam}</h1>
 		<iframe
 			src={urls[episodeNumber]}
 			class="video"
@@ -36,7 +38,7 @@
 <style type="text/css">
 	.main {
 		width: 100%;
-		height: 700px;
+		height: 800px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -44,6 +46,7 @@
 		background-position: center;
 	}
 	.video {
+		background-color: #000;
 		height: 550px;
 		margin-top: 50px;
 		margin-bottom: 50px;

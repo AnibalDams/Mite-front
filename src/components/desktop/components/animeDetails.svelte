@@ -13,14 +13,14 @@
 		{/if}
 	</div>
 	<div class="right">
-		<h2 class="title">{anime.name}</h2>
+		<a href={`/anime/${anime.id}`}><h2 class="title">{anime.name}</h2></a>
 		<div class="line" />
 		<span style="color:grey; font-size:1.1rem;margin-top:30px; "
 			>{anime.releaseDate} - {anime.type}</span
 		>
 		<div class="genres">
 			{#each anime.genres as genre}
-				<a href="#" class="genre">{genre}</a>
+				<a href={`/anime/genero/${genre}`} class="genre">{genre}</a>
 			{/each}
 		</div>
 		<p style="margin-top: 50px;margin-bottom: 30px;font-size: 1.1rem;">{anime.synopsis}</p>
@@ -35,6 +35,9 @@
 </section>
 
 <style type="text/css">
+	a{
+		text-decoration: none;
+	}
 	.information {
 		margin: 50px;
 		display: flex;

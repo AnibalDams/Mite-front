@@ -69,7 +69,12 @@
 
 <svelte:head>
 	{#if !$all.fetching}
-		<title>{$all.data['findAnime'].name} episodio {episodeParam} - Mite</title>
+		<meta name="description" content={`Ver ${$all.data['findAnime'].name} Sub Español, descargar ${$all.data['findAnime'].name} gratis, ${$all.data['findAnime'].name} en calidad HD.`}>
+		<meta property="og:title" content={`${$all.data['findAnime'].name}`}>
+		<meta property="og:url" content={`/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}>
+		<meta property="og:description" content={`Estoy viendo ${$all.data['findAnime'].name} Completo en Calidad HD, completamente Gratis!`}>
+		<link rel="canonical" href={`https://mite-jade.vercel.app/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}>
+		<title>{$all.data['findAnime'].name} Episodio {episodeParam} Sub Español - Mite</title>
 	{:else}
 		<title>Cargando...</title>
 	{/if}
@@ -99,6 +104,7 @@
 	<EpisodeD
 		{urls}
 		{episodeNumber}
+		{episodeParam}
 		anime={$all.data['findAnime']}
 		episodes={$all.data['findEpisodes']}
 	/>
