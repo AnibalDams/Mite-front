@@ -34,7 +34,7 @@
 </script>
 
 <svelte:head>
-	<title>Buscar - Mite</title>
+	<title>Buscar - animeMite</title>
 </svelte:head>
 <form class="form" on:submit|preventDefault={onSubmit}>
 	<a href="/" class="icon-button"><span class="material-icons-round">arrow_back</span></a>

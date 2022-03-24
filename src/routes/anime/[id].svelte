@@ -53,7 +53,7 @@
 			name="keywords"
 			content={`Anime, mite, Mite, ver anime, ver anime online, ver anime gratis en espanol, ver anime top, ver anime en espanol latino, ver anime gratis online, anime series, anime, ver ${$all.data['findAnime'].name},ver ${$all.data['findAnime'].name} subtitulado, ver ${$all.data['findAnime'].name} sub español, ${$all.data['findAnime'].name} de que se trata, ${$all.data['findAnime'].name} final, ${$all.data['findAnime'].name} episodios`}
 		/>
-		<title>Ver Anime {$all.data['findAnime'].name} Online Gratis en HD - Mite</title>
+		<title>Ver Anime {$all.data['findAnime'].name} Online Gratis en HD - animeMite</title>
 	{/if}
 </svelte:head>
 

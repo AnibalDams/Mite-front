@@ -25,7 +25,7 @@
 <svelte:window bind:innerWidth={width} />
 
 <svelte:head>
-	<title>Animes del genero {genre} - Mite</title>
+	<title>Animes del genero {genre} - animeMite</title>
 </svelte:head>
 
 

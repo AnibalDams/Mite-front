@@ -46,7 +46,7 @@
 </script>
 
 <svelte:head>
-	<title>Mite - Anime online en HD y con subtítulos en español</title>
+	<title>animeMite - Anime online en HD y con subtítulos en español</title>
 </svelte:head>
 {#if $all.fetching}
 	<Loading />

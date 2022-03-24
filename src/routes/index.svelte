@@ -8,7 +8,7 @@
 <svelte:head>
 	<link rel="canonical" href="https://mite-jade.vercel.app">
 
-	<meta property="og:title" content="Anime Online - Mite">
+	<meta property="og:title" content="Anime Online - animeMite">
 	<meta
 		name="description"
 		content="Mite, una plataforma para ver anime online en HD subtitulado al español y leer manga (aun no implementado)"
@@ -16,7 +16,7 @@
 
 	<meta
 		name="keywords"
-		content="Anime, mite, Mite, ver anime, ver anime online, ver anime gratis en espanol, ver anime top, ver anime en espanol latino, ver anime gratis online, anime series, anime"
+		content="Anime, mite, Mite,animeMite, ver anime, ver anime online, ver anime gratis en espanol, ver anime top, ver anime en espanol latino, ver anime gratis online, anime series, anime"
 	/>
 </svelte:head>
 
