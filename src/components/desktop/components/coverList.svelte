@@ -58,6 +58,7 @@
 		bottom: 0;
 		background: rgba(10, 10, 10, 0.5);
 	}
+	
 	.item:hover .cover:after,
 	.item:hover .actions .button {
 		visibility: visible;
@@ -72,7 +73,7 @@
 	}
 	.gradient {
 		width: 210px;
-
+		border-radius: 4.5px;
 		height: 310px;
 		position: absolute;
 		top: 0;

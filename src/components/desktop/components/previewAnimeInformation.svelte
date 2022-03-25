@@ -18,8 +18,8 @@
 			{animeData.releaseDate}</span
 		>
 	</div>
-	{#if animeData.synopsis.length >= 800}
-		<p class="synopsis">{animeData.synopsis.substring(0, 800)}...</p>
+	{#if animeData.synopsis.length > 390}
+		<p class="synopsis">{animeData.synopsis.substring(0, 390)}...</p>
 	{:else}
 		<p class="synopsis">{animeData.synopsis}</p>
 	{/if}
