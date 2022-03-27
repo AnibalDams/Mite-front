@@ -5,6 +5,7 @@
 	import { gql, operationStore, query } from '@urql/svelte';
 	import { page } from '$app/stores';
 	let haveEpisode;
+	let height;
 	let animeId = $page.params.animeId;
 	let episodeNumber = Number($page.params.episodio) - 1;
 	$: episodeParam = Number($page.params.episodio);
@@ -44,7 +45,6 @@
 	const all = operationStore(queryAnimes, { animeId });
 
 	query(all);
-	console.log($all);
 	$: if (
 		!$all.fetching &&
 		$all.data['findEpisodes'][0].message === 'Este anime no cuenta con ningun episodio aun.'
@@ -65,7 +65,8 @@
 	}
 </script>
 
-<svelte:window bind:innerWidth={width} />
+<svelte:window bind:innerHeight={height} bind:innerWidth={width} />
+
 
 <svelte:head>
 	{#if !$all.fetching}
@@ -92,9 +93,10 @@
 		>
 	</div>
 {:else if !haveEpisode}
-	<div style="width:100%; display: flex; justify-content:center;align-items: center;">
+	<div style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
+				.data['findAnime'].image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;"ba>
 		<span
-			style="display: inline-block;margin-top: 270px;margin-left: 10px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
+			style="display: inline-block;margin-top: 270px;margin-left: 10px;height: 300px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
 			>{$all.data['findAnime'].name} no cuenta con ningun episodio aun.
 			<a href={`/anime/${$all.data['findAnime'].id}`} style="text-decoration: underline;">Volver.</a
 			></span
