@@ -16,6 +16,9 @@
 	let width;
 	const queryAnimes = gql`
 		query ($animeId: String!) {
+			animeRandom {
+				image
+			}
 			findAnime(animeID: $animeId) {
 				message
 				id
@@ -75,7 +78,12 @@
 		<meta property="og:url" content={`/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}>
 		<meta property="og:description" content={`Estoy viendo ${$all.data['findAnime'].name} Completo en Calidad HD, completamente Gratis!`}>
 		<link rel="canonical" href={`https://mite-jade.vercel.app/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}>
-		<title>{$all.data['findAnime'].name} Episodio {episodeParam} Sub Español - Mite</title>
+		{#if $all.data['findAnime'].message === 'El anime solicitado no existe.'}
+			<title>El anime solicitado no existe</title>
+			{:else}
+				<title>{$all.data['findAnime'].name} Episodio {episodeParam} Sub Español - Mite</title>
+
+		{/if}
 	{:else}
 		<title>Cargando...</title>
 	{/if}
@@ -84,9 +92,10 @@
 {#if $all.fetching}
 	<div />
 {:else if !$all.fetching && $all.data['findAnime'].message === 'El anime solicitado no existe.'}
-	<div style="width:100%; display: flex; justify-content:center;align-items: center;">
+	<div style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
+				.data['animeRandom'].image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;">
 		<span
-			style="display: inline-block;margin-top: 270px;margin-left: 10px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
+			style="display: inline-block;margin-top: 270px;margin-left: 10px;height: 300px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
 			>El anime solicitado no existe <a href="/" style="text-decoration: underline;"
 				>Vuelve al inicio</a
 			></span
@@ -94,7 +103,7 @@
 	</div>
 {:else if !haveEpisode}
 	<div style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
-				.data['findAnime'].image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;"ba>
+				.data['findAnime'].image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;">
 		<span
 			style="display: inline-block;margin-top: 270px;margin-left: 10px;height: 300px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
 			>{$all.data['findAnime'].name} no cuenta con ningun episodio aun.
