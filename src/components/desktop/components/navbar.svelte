@@ -8,7 +8,7 @@
 		<input type="text" bind:value={search} name="search" class="input" placeholder="Buscar" />
 		<a
 			class="search-button"
-			on:click={() => setTimeout(() => window.location.reload(), 1000)}
+			on:click={() => setTimeout(() => window.location.reload(), 1)}
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
 	</div>

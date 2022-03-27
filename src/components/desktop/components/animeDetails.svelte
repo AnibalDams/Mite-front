@@ -2,6 +2,7 @@
 	import NavBar from './navbar.svelte';
 	import EpisodesList from './EpisodesList.svelte';
 	export let anime;
+	let genres = anime.genres.sort()
 	export let episodes;
 	let color=anime.onGoing?"#04b31b":"#333633"; 
 </script>
@@ -20,7 +21,7 @@
 			>{anime.releaseDate} - {anime.type}</span
 		>
 		<div class="genres">
-			{#each anime.genres as genre}
+			{#each genres as genre}
 				<a href={`/anime/genero/${genre}`} class="genre">{genre}</a>
 			{/each}
 		</div>

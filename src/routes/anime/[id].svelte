@@ -9,6 +9,9 @@
 	let animeId = $page.params.id;
 	const queryAnimes = gql`
 		query ($animeId: String!) {
+			animeRandom {
+				image
+			}
 			findAnime(animeID: $animeId) {
 				message
 				id
@@ -60,9 +63,10 @@
 {#if $all.fetching}
 	<Loading />
 {:else if $all.data['findAnime'].message === 'El anime solicitado no existe.'}
-	<div style="width:100%; display: flex; justify-content:center;align-items: center;">
+	<div style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
+				.data['animeRandom'].image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;">
 		<span
-			style="display: inline-block;margin-top: 270px;margin-left: 10px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
+			style="display: inline-block;margin-top: 270px;margin-left: 10px;height: 300px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
 			>El anime solicitado no existe <a href="/">Vuelve al inicio</a></span
 		>
 	</div>
