@@ -3,6 +3,7 @@
 	import EpisodesList from './EpisodesList.svelte';
 	export let anime;
 	export let episodes;
+	let color=anime.onGoing?"#04b31b":"#333633"; 
 </script>
 
 <section class="information">
@@ -13,7 +14,7 @@
 		{/if}
 	</div>
 	<div class="right">
-		<a href={`/anime/${anime.id}`}><h2 class="title">{anime.name}</h2></a>
+		<a href={`/anime/${anime.id}`} style="display:flex; align-items: center;"><h2 class="title">{anime.name}</h2><div style="width:20px;height: 20px; border-radius: 50%; background-color: {color}; margin-left: 10px;"></div></a>
 		<div class="line" />
 		<span style="color:grey; font-size:1.1rem;margin-top:30px; "
 			>{anime.releaseDate} - {anime.type}</span
@@ -30,6 +31,7 @@
 			<span>{anime.study}</span>
 		</div>
 		<span style="font-size: 1.8rem; font-weight: bold; margin-top: 50px;">Episodios</span>
+
 		<EpisodesList {episodes} />
 	</div>
 </section>

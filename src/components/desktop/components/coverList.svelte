@@ -15,7 +15,11 @@
 				</div>
 			</a>
 			<div class="info">
-				<a href={`/anime/${anime.id}`} class="title">{anime.name}</a>
+				{#if anime.name.length >23}
+					<a href={`/anime/${anime.id}`} class="title">{anime.name.substring(0,23)}...</a>
+					{:else}
+						<a href={`/anime/${anime.id}`} class="title">{anime.name}</a>
+				{/if}
 				<span class="text-inf">{anime.type}</span>
 				<div class="dot" />
 				<span class="text-inf">{anime.releaseDate}</span>
@@ -36,6 +40,7 @@
 	.item {
 		width: 210px;
 		height: 310px;
+		margin-bottom: 100px;
 		border-radius: 5px;
 		position: relative;
 		display: flex;

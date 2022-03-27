@@ -74,13 +74,13 @@
 			<PreviewAnimeInformation animeData={$all.data['animeRandom']} />
 		</div>
 	{/if}
-	<span class="text-big" style="margin-top: 20px;">Ultimos Animes Agregados</span>
-	{#if $all.fetching === false}
-		<CoverList data={$all.data['latestAnimesAdded']} />
-	{/if}
 	<span class="text-big" style="margin-top:100px;">Ultimos episodios agregados</span>
 	{#if $all.fetching === false}
 		<EpisodesSlider episodeData={$all.data['latestEpisodesAdded']} />
+	{/if}
+	<span class="text-big" style="margin-top: 20px;">Ultimos Animes Agregados</span>
+	{#if $all.fetching === false}
+		<CoverList data={$all.data['latestAnimesAdded']} />
 	{/if}
 	<span class="text-big" style="margin-top:100px;">Animes más populares</span>
 	{#if $all.fetching === false}

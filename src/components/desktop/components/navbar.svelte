@@ -12,7 +12,7 @@
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
 	</div>
-	<div />
+	<div style="width:100px;" />
 </nav>
 
 <style>
