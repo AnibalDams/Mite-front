@@ -28,7 +28,7 @@
 	style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({anime.image});">
 	<NavBar />
 	<AnimeDetails {anime} {episodes} />
-	<p style="margin:30px;font-size: 2rem;font-weight: bold;">Relacionados</p>
+	<p style="margin:30px;font-size: 2rem;font-weight: bold;">Tambien podria gustarte</p>
 	<AnimeList data={$all.data['findAnimeByGenre']} detail={true}/>
 
 </main>
