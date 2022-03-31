@@ -1,17 +1,18 @@
+
 <script type="text/javascript">
 	let search = '';
 </script>
 
 <nav class="navBar">
-	<a href="/" class="brand-logo">Mite</a>
-	<div class="search-form">
+	<h1><a href="/" class="brand-logo">AnimeMite</a></h1>
+	<form class="search-form" on:submit|preventDefault={()=>{return ""}}>
 		<input type="text" bind:value={search} name="search" class="input" placeholder="Buscar" />
 		<a
 			class="search-button"
 			on:click={() => setTimeout(() => window.location.reload(), 1)}
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
-	</div>
+	</form>
 	<div style="width:100px;" />
 </nav>
 
@@ -44,22 +45,28 @@
 		border-bottom-left-radius: 5px;
 		border: none;
 		font-size: 1.2rem;
-		background: #fff;
+		background: #eee;
 		outline: none;
+		color: #111;
 	}
-	.input:focus {
+	.input:focus  {
 		background: #3f3f3f;
 		color: #eee;
 	}
 	.search-button {
 		text-decoration: none;
-
-		background: #4f4f4f;
+		background: #eee;
 		border: none;
-		padding: 15px;
+		padding-left: 15px;
+		padding-right:15px ;
+		padding-top: 16px;
+		padding-bottom: 16px;
 		cursor: pointer;
 		border-top-right-radius: 5px;
 		border-bottom-right-radius: 5px;
+	}
+	.search-button span {
+		color: #111;
 	}
 	.search-form:hover {
 		opacity: 0.95;

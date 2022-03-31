@@ -1,13 +1,18 @@
 <script type="text/javascript">
 	export let data;
+	export let detail;
 </script>
 
 <section class="list">
 	{#each data as anime}
 		<div class="item" title={anime.synopsis}>
-			<a href={`/anime/${anime.id}`} class="cover">
+			<a href={`/anime/${anime.id}`} class="cover" on:click={()=>{
+				if(detail){
+					setTimeout(()=>{window.location.reload()},0.1)
+				}
+			}}>
 				<img src={anime.cover} class="cover-img" loading="lazy" />
-				<p class="gradient" />
+				<!--<p class="gradient" />-->
 				<div class="actions">
 					<a href={`/anime/${anime.id}`} class="material-icons-round button">
 						play_circle_outline
@@ -16,9 +21,17 @@
 			</a>
 			<div class="info">
 				{#if anime.name.length >23}
-					<a href={`/anime/${anime.id}`} class="title">{anime.name.substring(0,23)}...</a>
+					<a href={`/anime/${anime.id}`} class="title" on:click={()=>{
+				if(detail){
+					setTimeout(()=>{window.location.reload()},0.1)
+				}
+			}}>{anime.name.substring(0,23)}...</a>
 					{:else}
-						<a href={`/anime/${anime.id}`} class="title">{anime.name}</a>
+						<a href={`/anime/${anime.id}`} class="title" on:click={()=>{
+				if(detail){
+					setTimeout(()=>{window.location.reload()},0.1)
+				}
+			}}>{anime.name}</a>
 				{/if}
 				<span class="text-inf">{anime.type}</span>
 				<div class="dot" />

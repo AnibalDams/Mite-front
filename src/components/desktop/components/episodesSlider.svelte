@@ -47,7 +47,7 @@
 								play_circle_outline
 							</a>
 						</div>
-						<p class="gradient" />
+						<!--<p class="gradient" />-->
 					</div>
 				</a>
 			</SwiperSlide>
@@ -88,7 +88,7 @@
 								play_circle_outline
 							</a>
 						</div>
-						<p class="gradient" />
+						<!--<p class="gradient" />-->
 					</div>
 				</a>
 			</SwiperSlide>
@@ -130,7 +130,7 @@
 		height: 210px;
 		object-fit: cover;
 	}
-	.gradient {
+/*	.gradient {
 		width: 310px;
 
 		height: 210px;
@@ -141,7 +141,7 @@
 		bottom: 0;
 
 		background: linear-gradient(to top, #0a0a0a 0, transparent 60%);
-	}
+	}*/
 	.title {
 		font-size: 1.2rem;
 		font-weight: bold;
