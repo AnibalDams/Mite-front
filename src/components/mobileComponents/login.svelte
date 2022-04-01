@@ -39,11 +39,17 @@
 		margin:  10px 0;
 		font-weight: bold;
 		font-size: 1.1rem;
-		background: #0f0f0f;
+		background: #0a0a0a;
 		color: #eee;
 		border-radius: 5px;
+		outline:none;
 		border: none;
-		outline: none;
+
+	}
+	.input:focus{
+		background: #eee;
+		color: #0a0a0a;
+
 	}
 	.button{
 		margin-bottom: 20px;
