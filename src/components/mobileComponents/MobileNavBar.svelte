@@ -5,6 +5,7 @@
 	<div class="icons">
 		<!--<a href="#"><span class="material-icons-round">translate</span></a>-->
 		<a href="/buscar"><span class="material-icons-round">search</span></a>
+		<a href="/login"><span class="material-icons-round">account_circle</span></a>
 	</div>
 </nav>
 

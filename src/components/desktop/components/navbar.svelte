@@ -13,7 +13,10 @@
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
 	</form>
-	<div style="width:100px;" />
+	<div  class="buttonGroup">
+		<a href="#" class="button">Ingresar</a>
+		<a href="#" class="button">Registrarse</a>
+	</div>
 </nav>
 
 <style>
@@ -76,5 +79,19 @@
 	}
 	.material-icons-round {
 		font-size: 1.2rem;
+	}
+	.button{
+		margin: 5px;
+		text-decoration: none;
+		font-size: 1.3rem;
+		font-weight: bold;
+		padding-left: 15px;
+		padding-right: 15px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-radius: 5px;
+	}
+	.button:hover{
+		background: rgba(10, 10, 10, 0.5);
 	}
 </style>
