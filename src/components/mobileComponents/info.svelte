@@ -3,11 +3,26 @@
 	import GenreList from './MobileGenreList.svelte';
 
 	export let data;
+	let visible = false;
+	let width
+
 </script>
+<svelte:window bind:innerWidth={width} />
+
+<div class="full" style="visibility: {visible?"visible":"hidden"};opacity:{visible?1:0}" on:click={()=>{
+	visible=false
+}}>
+	
+
+<img src={data.cover} style="width: {width<= 310?270: 300}px;height: {width<=310?470: 500}px;" />
+</div>
 
 <section class="information">
 	<div class="mainInfo">
-		<img src={data.cover} class="cover" loading="lazy" alt={data.name} />
+		<img src={data.cover} on:click={()=>{
+			visible = true
+		}
+		} class="cover" loading="lazy" alt={data.name} />
 
 		<div class="texts">
 			<h2 class="title">{data.name}</h2>
@@ -26,6 +41,27 @@
 </section>
 
 <style>
+	.full{
+		 display: flex; /* Hidden by default */
+		 justify-content: center;
+		 align-items: center;
+ 		 position: fixed; /* Stay in place */
+  		z-index: 1; /* Sit on top */
+  		left: 0;
+  		top: 0;
+  		width: 100%; /* Full width */
+  		height: 100%; /* Full height */
+  		overflow: auto; /* Enable scroll if needed */
+ 		 background-color: rgb(10,10,10); /* Fallback color */
+  		background-color: rgba(10,10,10,0.5); /* Black w/ opacity */
+  		opacity: 0;
+  		visibility: hidden;
+	}
+	.full img{
+		object-fit: cover;
+		border-radius: 5px;
+		
+	}
 	.material-icons-round {
 		margin-right: 5px;
 		color: #bbb;

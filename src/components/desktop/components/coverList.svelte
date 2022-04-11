@@ -63,7 +63,7 @@
 	</section>
 
 {:else}
-
+	
 	<section class="list">
 		{#each data as anime}
 			{#if animeToFilter != anime.name}
@@ -118,6 +118,7 @@
 						<span class="text-inf">{anime.releaseDate}</span>
 					</div>
 				</div>
+				{:else}
 			{/if}
 		{/each}
 	</section>
