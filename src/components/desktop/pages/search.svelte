@@ -11,10 +11,13 @@
 	<span>No se encontro ningun anime.</span>
 {:else}
 	<div class="help-text">
-		<span class="material-icons-round">search</span><span>Se {data.length===1?"encontró":"encontraron"} {data.length} resultados de: {searchIndex}</span>
+		<span class="material-icons-round">search</span><span
+			>Se {data.length === 1 ? 'encontró' : 'encontraron'}
+			{data.length} resultados de: {searchIndex}</span
+		>
 	</div>
 
-	<AnimeList {data} />
+	<AnimeList {data} type="normal" />
 {/if}
 
 <style type="text/css">

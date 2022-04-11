@@ -1,45 +1,128 @@
 <script type="text/javascript">
 	export let data;
 	export let detail;
+	export let type;
+	export let animeToFilter = '';
 </script>
 
+{#if type === 'normal'}
 <section class="list">
-	{#each data as anime}
-		<div class="item" title={anime.synopsis}>
-			<a href={`/anime/${anime.id}`} class="cover" on:click={()=>{
-				if(detail){
-					setTimeout(()=>{window.location.reload()},0.1)
-				}
-			}}>
-				<img src={anime.cover} class="cover-img" loading="lazy" />
-				<!--<p class="gradient" />-->
-				<div class="actions">
-					<a href={`/anime/${anime.id}`} class="material-icons-round button">
-						play_circle_outline
-					</a>
-				</div>
-			</a>
-			<div class="info">
-				{#if anime.name.length >23}
-					<a href={`/anime/${anime.id}`} class="title" on:click={()=>{
-				if(detail){
-					setTimeout(()=>{window.location.reload()},0.1)
-				}
-			}}>{anime.name.substring(0,23)}...</a>
+		{#each data as anime}
+			<div class="item" title={anime.synopsis}>
+				<a
+					href={`/anime/${anime.id}`}
+					class="cover"
+					on:click={() => {
+						if (detail) {
+							setTimeout(() => {
+								window.location.reload();
+							}, 0.01);
+						}
+					}}
+				>
+					<img src={anime.cover} class="cover-img" loading="lazy" />
+					<!--<p class="gradient" />-->
+					<div class="actions">
+						<a href={`/anime/${anime.id}`} class="material-icons-round button">
+							play_circle_outline
+						</a>
+					</div>
+				</a>
+				<div class="info">
+					{#if anime.name.length > 23}
+						<a
+							href={`/anime/${anime.id}`}
+							class="title"
+							on:click={() => {
+								if (detail) {
+									setTimeout(() => {
+										window.location.reload();
+									}, 0.1);
+								}
+							}}>{anime.name.substring(0, 23)}...</a
+						>
 					{:else}
-						<a href={`/anime/${anime.id}`} class="title" on:click={()=>{
-				if(detail){
-					setTimeout(()=>{window.location.reload()},0.1)
-				}
-			}}>{anime.name}</a>
-				{/if}
-				<span class="text-inf">{anime.type}</span>
-				<div class="dot" />
-				<span class="text-inf">{anime.releaseDate}</span>
+						<a
+							href={`/anime/${anime.id}`}
+							class="title"
+							on:click={() => {
+								if (detail) {
+									setTimeout(() => {
+										window.location.reload();
+									}, 0.1);
+								}
+							}}>{anime.name}</a
+						>
+					{/if}
+					<span class="text-inf">{anime.type}</span>
+					<div class="dot" />
+					<span class="text-inf">{anime.releaseDate}</span>
+				</div>
 			</div>
-		</div>
-	{/each}
-</section>
+		{/each}
+	</section>
+
+{:else}
+
+	<section class="list">
+		{#each data as anime}
+			{#if animeToFilter != anime.name}
+				<div class="item" title={anime.synopsis}>
+					<a
+						href={`/anime/${anime.id}`}
+						class="cover"
+						on:click={() => {
+							if (detail) {
+								setTimeout(() => {
+									window.location.reload();
+								}, 0.01);
+							}
+						}}
+					>
+						<img src={anime.cover} class="cover-img" loading="lazy" />
+						<!--<p class="gradient" />-->
+						<div class="actions">
+							<a href={`/anime/${anime.id}`} class="material-icons-round button">
+								play_circle_outline
+							</a>
+						</div>
+					</a>
+					<div class="info">
+						{#if anime.name.length > 23}
+							<a
+								href={`/anime/${anime.id}`}
+								class="title"
+								on:click={() => {
+									if (detail) {
+										setTimeout(() => {
+											window.location.reload();
+										}, 0.1);
+									}
+								}}>{anime.name.substring(0, 23)}...</a
+							>
+						{:else}
+							<a
+								href={`/anime/${anime.id}`}
+								class="title"
+								on:click={() => {
+									if (detail) {
+										setTimeout(() => {
+											window.location.reload();
+										}, 0.1);
+									}
+								}}>{anime.name}</a
+							>
+						{/if}
+						<span class="text-inf">{anime.type}</span>
+						<div class="dot" />
+						<span class="text-inf">{anime.releaseDate}</span>
+					</div>
+				</div>
+			{/if}
+		{/each}
+	</section>
+	
+{/if}
 
 <style>
 	.list {
@@ -76,7 +159,7 @@
 		bottom: 0;
 		background: rgba(10, 10, 10, 0.5);
 	}
-	
+
 	.item:hover .cover:after,
 	.item:hover .actions .button {
 		visibility: visible;

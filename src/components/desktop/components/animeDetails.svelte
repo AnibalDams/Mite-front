@@ -2,9 +2,9 @@
 	import NavBar from './navbar.svelte';
 	import EpisodesList from './EpisodesList.svelte';
 	export let anime;
-	let genres = anime.genres.sort()
+	let genres = anime.genres.sort();
 	export let episodes;
-	let color=anime.onGoing?"#04b31b":"#333633"; 
+	let color = anime.onGoing ? '#04b31b' : '#333633';
 </script>
 
 <section class="information">
@@ -15,7 +15,12 @@
 		{/if}
 	</div>
 	<div class="right">
-		<a href={`/anime/${anime.id}`} style="display:flex; align-items: center;"><h1 class="title">{anime.name}</h1><div style="width:20px;height: 20px; border-radius: 50%; background-color: {color}; margin-left: 10px;"></div></a>
+		<a href={`/anime/${anime.id}`} style="display:flex; align-items: center;"
+			><h1 class="title">{anime.name}</h1>
+			<div
+				style="width:20px;height: 20px; border-radius: 50%; background-color: {color}; margin-left: 10px;"
+			/></a
+		>
 		<div class="line" />
 		<span style="color:grey; font-size:1.1rem;margin-top:30px; "
 			>{anime.releaseDate} - {anime.type}</span
@@ -38,7 +43,7 @@
 </section>
 
 <style type="text/css">
-	a{
+	a {
 		text-decoration: none;
 	}
 	.information {

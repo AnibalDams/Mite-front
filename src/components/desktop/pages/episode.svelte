@@ -18,7 +18,10 @@
 >
 	<NavBar />
 	{#if urls.length > 0}
-		<h1 style="margin-left:50px;font-size: 3.5rem;margin-top: 20px">{anime.name} episodio {episodeParam}</h1>
+		<h1 style="margin-left:50px;font-size: 3.5rem;margin-top: 20px">
+			{anime.name} episodio {episodeParam}
+		</h1>
+
 		<iframe
 			src={urls[episodeNumber]}
 			class="video"

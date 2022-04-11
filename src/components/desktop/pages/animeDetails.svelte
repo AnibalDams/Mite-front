@@ -4,6 +4,7 @@
 	import AnimeList from '../components/coverList.svelte'
 	export let anime;
 	export let episodes;
+	let genres = anime.genres.sort()
 	import { gql, operationStore, query } from '@urql/svelte';
 	const queryAnimes = gql`
 		query ($genre: String!) {
@@ -18,7 +19,7 @@
 			}
 		}
 	`;
-	const all = operationStore(queryAnimes, { genre:anime.genres[0] });
+	const all = operationStore(queryAnimes, { genre:genres[0] });
 	query(all);
 </script>
 {#if $all.fetching===false}
@@ -29,7 +30,19 @@
 	<NavBar />
 	<AnimeDetails {anime} {episodes} />
 	<p style="margin:30px;font-size: 2rem;font-weight: bold;">Tambien podria gustarte</p>
-	<AnimeList data={$all.data['findAnimeByGenre']} detail={true}/>
+	<AnimeList data={$all.data['findAnimeByGenre'].sort(function (a, b) {
+
+  if (a.name > b.name) {
+    return 1;
+  }
+  if (a.name < b.name) {
+    return -1;
+  }
+  // a must be equal to b
+  return 0;
+}
+
+)} animeToFilter={anime.name} detail={true} type="recomendation"/>
 
 </main>
 

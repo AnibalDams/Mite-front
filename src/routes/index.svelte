@@ -6,9 +6,9 @@
 </script>
 
 <svelte:head>
-	<link rel="canonical" href="https://mite-jade.vercel.app">
+	<link rel="canonical" href="https://mite-jade.vercel.app" />
 
-	<meta property="og:title" content="Anime Online - animeMite">
+	<meta property="og:title" content="Anime Online - animeMite" />
 	<meta
 		name="description"
 		content="Mite, una plataforma para ver anime online en HD subtitulado al español y leer manga (aun no implementado)"

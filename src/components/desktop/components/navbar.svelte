@@ -1,11 +1,15 @@
-
 <script type="text/javascript">
 	let search = '';
 </script>
 
 <nav class="navBar">
 	<h1><a href="/" class="brand-logo">AnimeMite</a></h1>
-	<form class="search-form" on:submit|preventDefault={()=>{return ""}}>
+	<form
+		class="search-form"
+		on:submit|preventDefault={() => {
+			return '';
+		}}
+	>
 		<input type="text" bind:value={search} name="search" class="input" placeholder="Buscar" />
 		<a
 			class="search-button"
@@ -13,8 +17,8 @@
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
 	</form>
-	<div  class="buttonGroup">
-		<a href="#" class="button">Ingresar</a>
+	<div class="buttonGroup">
+		<a href="/login" class="button">Ingresar</a>
 		<a href="#" class="button">Registrarse</a>
 	</div>
 </nav>
@@ -52,7 +56,7 @@
 		outline: none;
 		color: #111;
 	}
-	.input:focus  {
+	.input:focus {
 		background: #3f3f3f;
 		color: #eee;
 	}
@@ -61,7 +65,7 @@
 		background: #eee;
 		border: none;
 		padding-left: 15px;
-		padding-right:15px ;
+		padding-right: 15px;
 		padding-top: 16px;
 		padding-bottom: 16px;
 		cursor: pointer;
@@ -80,7 +84,7 @@
 	.material-icons-round {
 		font-size: 1.2rem;
 	}
-	.button{
+	.button {
 		margin: 5px;
 		text-decoration: none;
 		font-size: 1.3rem;
@@ -91,7 +95,7 @@
 		padding-bottom: 10px;
 		border-radius: 5px;
 	}
-	.button:hover{
+	.button:hover {
 		background: rgba(10, 10, 10, 0.5);
 	}
 </style>

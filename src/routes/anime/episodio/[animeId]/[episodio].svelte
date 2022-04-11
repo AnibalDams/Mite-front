@@ -70,19 +70,29 @@
 
 <svelte:window bind:innerHeight={height} bind:innerWidth={width} />
 
-
 <svelte:head>
 	{#if !$all.fetching}
-		<meta name="description" content={`Ver ${$all.data['findAnime'].name} Sub Español, descargar ${$all.data['findAnime'].name} gratis, ${$all.data['findAnime'].name} en calidad HD.`}>
-		<meta property="og:title" content={`${$all.data['findAnime'].name}`}>
-		<meta property="og:url" content={`/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}>
-		<meta property="og:description" content={`Estoy viendo ${$all.data['findAnime'].name} Completo en Calidad HD, completamente Gratis!`}>
-		<link rel="canonical" href={`https://mite-jade.vercel.app/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}>
+		<meta
+			name="description"
+			content={`Ver ${$all.data['findAnime'].name} Sub Español, descargar ${$all.data['findAnime'].name} gratis, ${$all.data['findAnime'].name} en calidad HD.`}
+		/>
+		<meta property="og:title" content={`${$all.data['findAnime'].name}`} />
+		<meta
+			property="og:url"
+			content={`/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}
+		/>
+		<meta
+			property="og:description"
+			content={`Estoy viendo ${$all.data['findAnime'].name} Completo en Calidad HD, completamente Gratis!`}
+		/>
+		<link
+			rel="canonical"
+			href={`https://mite-jade.vercel.app/anime/episodio/${$all.data['findAnime'].id}/${episodeParam}`}
+		/>
 		{#if $all.data['findAnime'].message === 'El anime solicitado no existe.'}
 			<title>El anime solicitado no existe</title>
-			{:else}
-				<title>{$all.data['findAnime'].name} Episodio {episodeParam} Sub Español - Mite</title>
-
+		{:else}
+			<title>{$all.data['findAnime'].name} Episodio {episodeParam} Sub Español - Mite</title>
 		{/if}
 	{:else}
 		<title>Cargando...</title>
@@ -92,8 +102,11 @@
 {#if $all.fetching}
 	<div />
 {:else if !$all.fetching && $all.data['findAnime'].message === 'El anime solicitado no existe.'}
-	<div style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
-				.data['animeRandom'].image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;">
+	<div
+		style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
+			.data['animeRandom']
+			.image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;"
+	>
 		<span
 			style="display: inline-block;margin-top: 270px;margin-left: 10px;height: 300px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
 			>El anime solicitado no existe <a href="/" style="text-decoration: underline;"
@@ -102,8 +115,11 @@
 		>
 	</div>
 {:else if !haveEpisode}
-	<div style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
-				.data['findAnime'].image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;">
+	<div
+		style="width:100%; height: 100%;background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent), linear-gradient(to  right,rgb(13,13,13) ,transparent 60%),linear-gradient(to  left,rgb(13,13,13) ,transparent 40%),url({$all
+			.data['findAnime']
+			.image});background-position: top;background-size: cover; display: flex; justify-content:center;align-items: center;"
+	>
 		<span
 			style="display: inline-block;margin-top: 270px;margin-left: 10px;height: 300px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
 			>{$all.data['findAnime'].name} no cuenta con ningun episodio aun.

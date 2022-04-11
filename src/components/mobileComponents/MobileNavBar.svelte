@@ -20,7 +20,7 @@
 		border-radius: 50%;
 	}*/
 	nav {
-		background: rgb(13, 13, 13);
+		background: transparent;
 		padding: 15px;
 		display: flex;
 		flex-direction: row;

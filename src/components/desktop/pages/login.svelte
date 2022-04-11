@@ -1,6 +1,7 @@
 <script type="text/javascript">
+	import NavBar from '../components/navbar.svelte';
+
 	export let image;
-	console.log(image);
 </script>
 
 <svelte:head>
@@ -11,9 +12,8 @@
 	class="main"
 	style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
 >
-	<div style="height:80px;" />
 	<form class="form">
-		<h1>Iniciar Sesión</h1>
+		<h1 style="font-size:3rem;">Iniciar Sesión</h1>
 		<input type="text" class="input" placeholder="Nombre de usuario" />
 		<input type="password" class="input" placeholder="contraseña" />
 		<button type="submit" class="button">Iniciar Sesión</button>
@@ -29,7 +29,8 @@
 <style type="text/css">
 	.main {
 		max-width: 100%;
-		height: 400px;
+		height: 600px;
+		overflow: hidden;
 		background-position: center;
 		background-size: cover;
 	}
@@ -43,9 +44,8 @@
 		flex-direction: column;
 	}
 	.input {
+		width: 50%;
 		border: 1px solid #a0a0a0;
-
-		width: 80%;
 		padding: 20px;
 		margin: 10px 0;
 		font-weight: bold;
@@ -61,7 +61,8 @@
 	}
 	.button {
 		margin-bottom: 20px;
-		width: 80%;
+		width: 50%;
+		cursor: pointer;
 		padding-top: 10px;
 		padding-bottom: 10px;
 		padding-left: 15px;
@@ -74,6 +75,6 @@
 	}
 
 	.button:hover {
-		background: rgba(10, 10, 10, 0.5);
+		background: rgba(5, 5, 5, 0.8);
 	}
 </style>

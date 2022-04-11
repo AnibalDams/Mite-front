@@ -130,7 +130,7 @@
 		height: 210px;
 		object-fit: cover;
 	}
-/*	.gradient {
+	/*	.gradient {
 		width: 310px;
 
 		height: 210px;

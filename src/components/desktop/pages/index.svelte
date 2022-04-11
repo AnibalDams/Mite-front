@@ -80,14 +80,14 @@
 	{/if}
 	<span class="text-big" style="margin-top: 20px;">Ultimos Animes Agregados</span>
 	{#if $all.fetching === false}
-		<CoverList data={$all.data['latestAnimesAdded']} />
+		<CoverList data={$all.data['latestAnimesAdded']} type="normal" />
 	{/if}
 	<span class="text-big" style="margin-top:100px;">Animes más populares</span>
 	{#if $all.fetching === false}
-		<CoverList data={$all.data['mostPopularAnime']} />
+		<CoverList data={$all.data['mostPopularAnime']} type="normal" />
 	{/if}
 	<span class="text-big" style="margin-top:100px;">{$all.data['animeAndGenreRandom'].genre}</span>
-	<CoverList data={$all.data['animeAndGenreRandom'].animes} />
+	<CoverList data={$all.data['animeAndGenreRandom'].animes} type="normal" />
 {/if}
 
 <style>

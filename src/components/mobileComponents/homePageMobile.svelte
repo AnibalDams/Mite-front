@@ -53,6 +53,7 @@
 {:else}
 	<MobileNavBar />
 	<MobileGenreList {genres} />
+
 	<span style="display: inline-block;margin:10px;color: #ddd; font-size: 1.2rem;font-weight: bold;"
 		>Ultimos episodios agregados</span
 	>
@@ -68,7 +69,6 @@
 	>
 	<MobilePopularAnimeList data={$all} />
 	{#if !$all.fetching}
-		
 		<footer
 			style="width: 100%;height: 100px; display: flex; align-items:center;justify-content: center;border-top: 1px solid #aaa;"
 		>
