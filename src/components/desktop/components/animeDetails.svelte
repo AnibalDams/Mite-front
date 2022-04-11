@@ -66,6 +66,7 @@
 		 display: flex; /* Hidden by default */
 		 justify-content: center;
 		 align-items: center;
+		 
  		 position: fixed; /* Stay in place */
   		z-index: 1; /* Sit on top */
   		left: 0;
@@ -82,6 +83,7 @@
 		object-fit: cover;
 		width: 300px;
 		height: 500px;
+		border-radius: 5px;
 	}
 	a {
 		text-decoration: none;

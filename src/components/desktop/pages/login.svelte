@@ -50,7 +50,7 @@
 		margin: 10px 0;
 		font-weight: bold;
 		font-size: 1.1rem;
-		background: #0a0a0a;
+		background: rgba(10, 10, 10, 0.9);
 		color: #eee;
 		border-radius: 5px;
 		outline: none;
