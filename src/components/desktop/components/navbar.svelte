@@ -5,6 +5,10 @@
 	let opacity = 0;
 	let profileName = cookie.get('profileName');
 	let profileAvatar = cookie.get('profileAvatar');
+	if(profileName === undefined){
+
+		//profileName = "null"
+	}
 </script>
 
 <nav class="navBar">
@@ -34,7 +38,13 @@
 			}}>Cerrar sesión</a
 		>
 	</div>
-	{#if profileName != 'null' || profileName != null || profileName != undefined}
+	{#if profileName === null || profileName === undefined  }
+		<div class="buttonGroup">
+			<a href="/login" class="button">Ingresar</a>
+			<a href="#" class="button">Registrarse</a>
+		</div>
+	{:else}
+		
 		<div class="avatarZone">
 			<img
 				src={profileAvatar}
@@ -47,11 +57,6 @@
 					}
 				}}
 			/>
-		</div>
-	{:else}
-		<div class="buttonGroup">
-			<a href="/login" class="button">Ingresar</a>
-			<a href="#" class="button">Registrarse</a>
 		</div>
 	{/if}
 </nav>

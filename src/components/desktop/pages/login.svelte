@@ -53,12 +53,7 @@
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
-{#if getUser != 'null'}
-	<span
-		style="display: inline-block;font-size:2rem;font-weight: bold;margin-left:30%; margin-top: 200px;"
-		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
-	</span>
-{:else}
+{#if getUser === null || getUser === undefined}
 	<div
 		class="main"
 		style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
@@ -76,6 +71,12 @@
 			>
 		</form>
 	</div>
+{:else}
+<span
+		style="display: inline-block;font-size:2rem;font-weight: bold;margin-left:30%; margin-top: 200px;"
+		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
+	</span>
+	
 {/if}
 
 <style type="text/css">
