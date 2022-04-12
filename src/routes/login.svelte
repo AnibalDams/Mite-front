@@ -2,6 +2,7 @@
 	import LoginMobile from '../components/mobileComponents/login.svelte';
 	import LoginDesktop from '../components/desktop/pages/login.svelte';
 	import { gql, operationStore, query } from '@urql/svelte';
+
 	let width;
 	const queryAnimes = gql`
 		query {

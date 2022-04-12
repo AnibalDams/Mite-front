@@ -1,12 +1,65 @@
 <script type="text/javascript">
 	export let image;
-	console.log(image);
+
+	import { gql, operationStore, mutation } from '@urql/svelte';
+	import { getNotificationsContext } from 'svelte-notifications';
+	import { toast } from '@zerodevx/svelte-toast';
+	import cookie from 'cookie-cutter';
+
+	let username = '';
+	let password = '';
+
+	const { addNotification } = getNotificationsContext();
+	const mutateLogin = mutation({
+		query: `
+      		mutation ($username: String!, $password: String!) {
+			  login(username:$username,password:$password)
+
+		}
+    `
+	});
+	let getUser = cookie.get('user');
+
+	async function onSubmit(e) {
+		const login = await mutateLogin({ username, password });
+		if (username.length > 0 && password.length > 0) {
+			if (login.data.login) {
+				if (
+					login.data.login === 'Nombre de usuario incorrecto' ||
+					login.data.login === 'Contraseña incorrecta'
+				) {
+					toast.push(login.data.login, {
+						theme: {
+							'--toastBackground': '#F56565',
+							'--toastBarBackground': '#C53030'
+						}
+					});
+				} else {
+					toast.push('¡Has iniciado sesión satisfactoriamente!', {
+						theme: {
+							'--toastBackground': '#48BB78',
+							'--toastBarBackground': '#2F855A'
+						}
+					});
+					cookie.set('user', username);
+				}
+			}
+		}
+	}
+
 </script>
 
 <svelte:head>
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
+
+{#if typeof getUser === 'string'}
+	<span
+		style="display: inline-block;font-size:2rem;font-weight: bold;text-align: center; margin-top: 200px;"
+		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
+	</span>
+	{:else}
 <div
 	class="main"
 	style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
@@ -14,8 +67,8 @@
 	<div style="height:80px;" />
 	<form class="form">
 		<h1>Iniciar Sesión</h1>
-		<input type="text" class="input" placeholder="Nombre de usuario" />
-		<input type="password" class="input" placeholder="contraseña" />
+		<input type="text" class="input" bind:value={username} placeholder="Nombre de usuario" />
+		<input type="password" bind:value={password} class="input" placeholder="contraseña" />
 		<button type="submit" class="button">Iniciar Sesión</button>
 		<span style="font-size:1.1rem;font-weight:bold;display: inline-block;"
 			>¿No tienes una cuenta?. <a
@@ -25,7 +78,7 @@
 		>
 	</form>
 </div>
-
+{/if}
 <style type="text/css">
 	.main {
 		max-width: 100%;
@@ -50,7 +103,7 @@
 		margin: 10px 0;
 		font-weight: bold;
 		font-size: 1.1rem;
-		background: #0a0a0a;
+		background: rgba(10, 10, 10, 0.9);
 		color: #eee;
 		border-radius: 5px;
 		outline: none;

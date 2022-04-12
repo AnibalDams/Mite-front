@@ -6,7 +6,7 @@
 </script>
 
 {#if type === 'normal'}
-<section class="list">
+	<section class="list">
 		{#each data as anime}
 			<div class="item" title={anime.synopsis}>
 				<a
@@ -61,9 +61,7 @@
 			</div>
 		{/each}
 	</section>
-
 {:else}
-	
 	<section class="list">
 		{#each data as anime}
 			{#if animeToFilter != anime.name}
@@ -118,11 +116,9 @@
 						<span class="text-inf">{anime.releaseDate}</span>
 					</div>
 				</div>
-				{:else}
-			{/if}
+			{:else}{/if}
 		{/each}
 	</section>
-	
 {/if}
 
 <style>

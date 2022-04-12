@@ -6,26 +6,28 @@
 	export let episodes;
 	let color = anime.onGoing ? '#04b31b' : '#333633';
 	let visible = false;
-
 </script>
-<div class="full" style="visibility: {visible?"visible":"hidden"};opacity:{visible?1:0}" on:click={()=>{
-	visible=false
-}}>
-	
 
-<img src={anime.cover} >
-
+<div
+	class="full"
+	style="visibility: {visible ? 'visible' : 'hidden'};opacity:{visible ? 1 : 0}"
+	on:click={() => {
+		visible = false;
+	}}
+>
+	<img src={anime.cover} />
 </div>
 <section class="information">
 	<div class="left">
 		<div class="img">
-		<div class="coverC" on:click={()=>{
-			visible=true
-		}}>
-			
-		<img src={anime.cover} class="cover" />
-		
-		</div>
+			<div
+				class="coverC"
+				on:click={() => {
+					visible = true;
+				}}
+			>
+				<img src={anime.cover} class="cover" />
+			</div>
 		</div>
 		{#if episodes[0].message != 'Este anime no cuenta con ningun episodio aun.'}
 			<a href={`/anime/episodio/${anime.id}/1`} class="button">Ver episodio 1</a>
@@ -60,26 +62,24 @@
 </section>
 
 <style type="text/css">
+	.full {
+		display: flex; /* Hidden by default */
+		justify-content: center;
+		align-items: center;
 
-
-		.full{
-		 display: flex; /* Hidden by default */
-		 justify-content: center;
-		 align-items: center;
-		 
- 		 position: fixed; /* Stay in place */
-  		z-index: 1; /* Sit on top */
-  		left: 0;
-  		top: 0;
-  		width: 100%; /* Full width */
-  		height: 100%; /* Full height */
-  		overflow: auto; /* Enable scroll if needed */
- 		 background-color: rgb(10,10,10); /* Fallback color */
-  		background-color: rgba(10,10,10,0.9); /* Black w/ opacity */
-  		opacity: 0;
-  		visibility: hidden;
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(10, 10, 10); /* Fallback color */
+		background-color: rgba(10, 10, 10, 0.9); /* Black w/ opacity */
+		opacity: 0;
+		visibility: hidden;
 	}
-	.full img{
+	.full img {
 		object-fit: cover;
 		width: 300px;
 		height: 500px;
@@ -98,14 +98,13 @@
 		flex-direction: column;
 		align-items: center;
 	}
-	.coverC{
+	.coverC {
 		cursor: pointer;
 		position: relative;
 		height: 278px;
 		width: 195px;
-
 	}
-	.coverC:after{
+	.coverC:after {
 		display: none;
 		border-radius: 5px;
 		top: 0;
@@ -113,7 +112,7 @@
 		right: 0;
 		bottom: 0;
 		position: absolute;
-		content: "";
+		content: '';
 		text-align: center;
 		height: 278px;
 		width: 195px;
@@ -121,10 +120,9 @@
 		z-index: 99;
 		opacity: 0;
 	}
-	.img:hover .coverC:after{
+	.img:hover .coverC:after {
 		display: block;
 		opacity: 1;
-
 	}
 	.cover {
 		height: 278px;
@@ -201,7 +199,7 @@
 		color: #aaa !important;
 		margin-right: 30px;
 	}
-	.cover:hover .middle{
+	.cover:hover .middle {
 		opacity: 1;
 	}
 </style>
