@@ -1,6 +1,5 @@
 <script type="text/javascript">
 	export let episodes;
-	console.log(episodes);
 </script>
 
 <div class="list">

@@ -38,10 +38,10 @@
 			}}>Cerrar sesión</a
 		>
 	</div>
-	{#if profileName === null || profileName === undefined  }
+	{#if profileName === null || profileName === undefined  || profileName === "null"}
 		<div class="buttonGroup">
 			<a href="/login" class="button">Ingresar</a>
-			<a href="#" class="button">Registrarse</a>
+			<a href="/signup" class="button">Registrarse</a>
 		</div>
 	{:else}
 		
@@ -86,7 +86,11 @@
 		opacity: 0.9;
 	}
 	.input {
-		padding: 15px;
+		padding-top: 15px;
+		padding-left: 15px;
+		padding-right: 15px;
+		padding-bottom: 15px;
+		max-height: 54px;
 		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
 		border: none;
@@ -100,13 +104,14 @@
 		color: #eee;
 	}
 	.search-button {
+		max-height: 54px;
 		text-decoration: none;
 		background: #eee;
 		border: none;
 		padding-left: 15px;
 		padding-right: 15px;
-		padding-top: 16px;
-		padding-bottom: 16px;
+		padding-top: 15px;
+		padding-bottom: 15px;
 		cursor: pointer;
 		border-top-right-radius: 5px;
 		border-bottom-right-radius: 5px;
@@ -143,11 +148,11 @@
 
 	.avatar {
 		display: inline-block;
-		width: 80px;
-		height: 80px;
+		width: 70px;
+		height: 70px;
 		object-fit: cover;
 		cursor: pointer;
-		border-radius: 50%;
+		border-radius: 5px;
 		margin-top: 10px;
 	}
 	.dropDown {

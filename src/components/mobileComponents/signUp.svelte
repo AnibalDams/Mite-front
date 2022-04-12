@@ -3,6 +3,8 @@
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { toast } from '@zerodevx/svelte-toast';
 	import cookie from 'cookie-cutter';
+	import { onMount } from 'svelte';
+
 
 	export let image;
 	let username = '';
@@ -12,35 +14,39 @@
 	const mutateLogin = mutation({
 		query: `
       		mutation ($username: String!, $password: String!) {
-			  login(username:$username,password:$password)
+			  newUser(username:$username,password:$password)
 
 		}
     `
 	});
-	let getUser = cookie.get('user');
+	let getUser ="";
+	onMount(()=>{
+			getUser =  cookie.get('user')
+	})
 
 	async function onSubmit(e) {
 		const login = await mutateLogin({ username, password });
+		console.log(login)
 		if (username.length > 0 && password.length > 0) {
-			if (login.data.login) {
+			if (login.data.newUser) {
 				if (
-					login.data.login === 'Nombre de usuario incorrecto' ||
+					login.data.newUser === 'El usuario ya esta en uso' ||
 					login.data.login === 'Contraseña incorrecta'
 				) {
-					toast.push(login.data.login, {
+					toast.push(login.data.newUser, {
 						theme: {
 							'--toastBackground': '#F56565',
 							'--toastBarBackground': '#C53030'
 						}
 					});
 				} else {
-					toast.push('¡Has iniciado sesión satisfactoriamente!', {
+					toast.push(`¡Bienvenido(a) ${username}!`, {
 						theme: {
 							'--toastBackground': '#48BB78',
 							'--toastBarBackground': '#2F855A'
 						}
 					});
-					cookie.set('user', username);
+					
 					window.location.reload();
 				}
 			}
@@ -52,20 +58,20 @@
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
-{#if getUser === null || getUser === undefined || getUser === "null"} 
+{#if getUser === null || getUser === undefined || getUser === "null"}
 	<div
 		class="main"
 		style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
 	>
 		<form class="form" on:submit|preventDefault={onSubmit}>
-			<h1 style="font-size:3rem;">Iniciar Sesión</h1>
+			<h1 style="font-size:3rem;">Registrarse</h1>
 			<input type="text" bind:value={username} class="input" placeholder="Nombre de usuario" />
 			<input type="password" class="input" bind:value={password} placeholder="contraseña" />
-			<button type="submit" class="button">Iniciar Sesión</button>
+			<button type="submit" class="button">Registrarse</button>
 			<span style="font-size:1.1rem;font-weight:bold;display: inline-block;"
-				>¿No tienes una cuenta?. <a
-					href="/signup"
-					style="text-decoration: none; border-bottom: 2px solid #eee;">¡Registrate!</a
+				>Ya tienes una cuenta?. <a
+					href="/login"
+					style="text-decoration: none; border-bottom: 2px solid #eee;">¡Inicia sesión!</a
 				></span
 			>
 		</form>
@@ -96,7 +102,7 @@
 		flex-direction: column;
 	}
 	.input {
-		width: 50%;
+		width: 80%;
 		border: 1px solid #a0a0a0;
 		padding: 20px;
 		margin: 10px 0;
@@ -113,7 +119,7 @@
 	}
 	.button {
 		margin-bottom: 20px;
-		width: 50%;
+		width: 80%;
 		cursor: pointer;
 		padding-top: 10px;
 		padding-bottom: 10px;
