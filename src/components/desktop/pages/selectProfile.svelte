@@ -84,7 +84,7 @@ const mutateProfile = mutation({
 	<a
 	href="/"
 	style="display: inline-block;text-decoration:none; font-size:2rem;font-weight:bold; margin: 10px;"
-	>Inicio</a
+	>Ir al inicio</a
 >
 
 {#if newProfile}
