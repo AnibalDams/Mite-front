@@ -126,7 +126,6 @@ const mutateProfile = mutation({
 				>
 					<img
 						src={Profile.avatar}
-						style={profile === Profile.name ? 'border: 2px solid #fff;' : 'border:none;'}
 					/>
 					<button class="edit" title={`Editar el perfil de ${Profile.name}`}>
 						<span class="material-icons-round" style="color:#0a0a0a;">edit</span>
