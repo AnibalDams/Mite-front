@@ -33,9 +33,6 @@
 		user = cookie.get('user');
 		profile = cookie.get('profileName');
 
-		if (user.length <= 0) {
-			user = '';
-		}
 		$all.variables = { user };
 
 		all.reexecute({ requestPolicy: 'network-only' });

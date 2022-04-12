@@ -63,7 +63,7 @@
 		style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
 	>
 		<div style="height:80px;" />
-		<form class="form">
+		<form class="form" on:submit|preventDefault={onSubmit}>
 			<h1>Iniciar Sesión</h1>
 			<input type="text" class="input" bind:value={username} placeholder="Nombre de usuario" />
 			<input type="password" bind:value={password} class="input" placeholder="contraseña" />

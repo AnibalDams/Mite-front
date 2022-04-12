@@ -34,7 +34,7 @@
 			}}>Cerrar sesión</a
 		>
 	</div>
-	{#if profileName != 'null'}
+	{#if profileName != 'null' || profileName != null || profileName != undefined}
 		<div class="avatarZone">
 			<img
 				src={profileAvatar}
