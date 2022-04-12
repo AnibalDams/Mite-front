@@ -95,6 +95,7 @@
 		border-bottom-left-radius: 5px;
 		border: none;
 		font-size: 1.2rem;
+		font-weight: bold;
 		background: #eee;
 		outline: none;
 		color: #111;
