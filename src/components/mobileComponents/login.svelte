@@ -46,39 +46,38 @@
 			}
 		}
 	}
-
 </script>
 
 <svelte:head>
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
-
 {#if typeof getUser === 'string'}
 	<span
 		style="display: inline-block;font-size:2rem;font-weight: bold;text-align: center; margin-top: 200px;"
 		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
 	</span>
-	{:else}
-<div
-	class="main"
-	style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
->
-	<div style="height:80px;" />
-	<form class="form">
-		<h1>Iniciar Sesión</h1>
-		<input type="text" class="input" bind:value={username} placeholder="Nombre de usuario" />
-		<input type="password" bind:value={password} class="input" placeholder="contraseña" />
-		<button type="submit" class="button">Iniciar Sesión</button>
-		<span style="font-size:1.1rem;font-weight:bold;display: inline-block;"
-			>¿No tienes una cuenta?. <a
-				href="/registrarse"
-				style="text-decoration: none; border-bottom: 2px solid #eee;">¡Registrate!</a
-			></span
-		>
-	</form>
-</div>
+{:else}
+	<div
+		class="main"
+		style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
+	>
+		<div style="height:80px;" />
+		<form class="form">
+			<h1>Iniciar Sesión</h1>
+			<input type="text" class="input" bind:value={username} placeholder="Nombre de usuario" />
+			<input type="password" bind:value={password} class="input" placeholder="contraseña" />
+			<button type="submit" class="button">Iniciar Sesión</button>
+			<span style="font-size:1.1rem;font-weight:bold;display: inline-block;"
+				>¿No tienes una cuenta?. <a
+					href="/registrarse"
+					style="text-decoration: none; border-bottom: 2px solid #eee;">¡Registrate!</a
+				></span
+			>
+		</form>
+	</div>
 {/if}
+
 <style type="text/css">
 	.main {
 		max-width: 100%;

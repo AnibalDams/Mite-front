@@ -4,10 +4,9 @@
 	import cookie from 'cookie-cutter';
 	import { toast } from '@zerodevx/svelte-toast';
 
-
-	let user=""
+	let user = '';
 	let profile;
-	
+
 	const queryAnimes = gql`
 		query ($user: String!) {
 			findAllProfiles(user: $user) {
@@ -19,52 +18,54 @@
 		}
 	`;
 	const all = operationStore(queryAnimes, { user }, { requestPolicy: 'cache-first' });
-	function setProfile(name,avatar){
-		cookie.set('profileName',name)
-		cookie.set('profileAvatar',avatar)
-		profile = name
-							toast.push(`Perfil ${name} seleccionado`, {
-						theme: {
-							'--toastBackground': '#48BB78',
-							'--toastBarBackground': '#2F855A'
-						}
-					});
-
-		
+	function setProfile(name, avatar) {
+		cookie.set('profileName', name);
+		cookie.set('profileAvatar', avatar);
+		profile = name;
+		toast.push(`Perfil ${name} seleccionado`, {
+			theme: {
+				'--toastBackground': '#48BB78',
+				'--toastBarBackground': '#2F855A'
+			}
+		});
 	}
-	onMount(()=>{
+	onMount(() => {
 		user = cookie.get('user');
-		profile = cookie.get('profileName')
+		profile = cookie.get('profileName');
 
-		if(user.length <= 0){
-			user=""
+		if (user.length <= 0) {
+			user = '';
 		}
 		$all.variables = { user };
 
 		all.reexecute({ requestPolicy: 'network-only' });
-
-
-
-	})
+	});
 	query(all);
-	
 </script>
 
 <svelte:head>
 	<title>Selecciona un perfil - AnimeMite</title>
 </svelte:head>
-<a href="/" style="display: inline-block;text-decoration:none; font-size:2rem;font-weight:bold; margin: 10px;">Inicio</a>
+<a
+	href="/"
+	style="display: inline-block;text-decoration:none; font-size:2rem;font-weight:bold; margin: 10px;"
+	>Inicio</a
+>
 {#if $all.fetching != true && $all.data.findAllProfiles}
 	<div class="container">
 		<h3>Selecciona un perfil</h3>
 		<div class="profiles">
 			{#each all.data.findAllProfiles as Profile}
-			
-		
-				<button class="profile"  on:click={()=>{
-					setProfile(Profile.name,Profile.avatar)
-				}}>
-					<img src={Profile.avatar} style={profile === Profile.name? "border: 2px solid #fff;":"border:none;"}/>
+				<button
+					class="profile"
+					on:click={() => {
+						setProfile(Profile.name, Profile.avatar);
+					}}
+				>
+					<img
+						src={Profile.avatar}
+						style={profile === Profile.name ? 'border: 2px solid #fff;' : 'border:none;'}
+					/>
 					<button class="edit">
 						<span class="material-icons-round" style="color:#0a0a0a;">edit</span>
 					</button>
@@ -116,7 +117,7 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.profile:active{
+	.profile:active {
 		opacity: 0.5;
 	}
 	.profile:hover {

@@ -2,9 +2,9 @@
 	let search = '';
 	import cookie from 'cookie-cutter';
 
-	let opacity=0;
-	let profileName = cookie.get('profileName')
-	let profileAvatar = cookie.get('profileAvatar')
+	let opacity = 0;
+	let profileName = cookie.get('profileName');
+	let profileAvatar = cookie.get('profileAvatar');
 </script>
 
 <nav class="navBar">
@@ -22,35 +22,37 @@
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
 	</form>
-			<div class="dropDown" style="opacity: {opacity};">
-				<a class="dropDownOption" href="/selectProfile">Cambiar de perfil</a>
-				<a class="dropDownOption" on:click={()=>{
-					cookie.set('user',null)
-					cookie.set('profileName',null)
-					cookie.set('profileAvatar',null)
-					window.location.reload()
-				}}>Cerrar sesión</a>
-				
-			</div>
-	{#if profileName != "null"}
+	<div class="dropDown" style="opacity: {opacity};">
+		<a class="dropDownOption" href="/selectProfile">Cambiar de perfil</a>
+		<a
+			class="dropDownOption"
+			on:click={() => {
+				cookie.set('user', null);
+				cookie.set('profileName', null);
+				cookie.set('profileAvatar', null);
+				window.location.reload();
+			}}>Cerrar sesión</a
+		>
+	</div>
+	{#if profileName != 'null'}
 		<div class="avatarZone">
-			
-			<img src={profileAvatar} class="avatar" on:click={()=>{
-				if(opacity === 0){
-					opacity = 1
-				}else{
-					opacity =0
-				}
-			}}>
-
+			<img
+				src={profileAvatar}
+				class="avatar"
+				on:click={() => {
+					if (opacity === 0) {
+						opacity = 1;
+					} else {
+						opacity = 0;
+					}
+				}}
+			/>
 		</div>
 	{:else}
-	<div class="buttonGroup">
-		<a href="/login" class="button">Ingresar</a>
-		<a href="#" class="button">Registrarse</a>
-	</div>
-
-
+		<div class="buttonGroup">
+			<a href="/login" class="button">Ingresar</a>
+			<a href="#" class="button">Registrarse</a>
+		</div>
 	{/if}
 </nav>
 
@@ -130,12 +132,11 @@
 	.button:hover {
 		background: rgba(10, 10, 10, 0.5);
 	}
-	.avatarZone{
+	.avatarZone {
 		position: relative;
-
 	}
 
-	.avatar{
+	.avatar {
 		display: inline-block;
 		width: 80px;
 		height: 80px;
@@ -144,7 +145,7 @@
 		border-radius: 50%;
 		margin-top: 10px;
 	}
-	.dropDown{
+	.dropDown {
 		position: absolute;
 		width: 100px;
 		height: 100px;
@@ -157,10 +158,9 @@
 		left: 91%;
 		right: 0;
 		bottom: 0;
-		background: rgb(13,13,13);
-
+		background: rgb(13, 13, 13);
 	}
-	.dropDownOption{
+	.dropDownOption {
 		margin: 10px;
 		width: 100%;
 		cursor: pointer;

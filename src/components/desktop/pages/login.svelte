@@ -19,7 +19,7 @@
     `
 	});
 	let getUser = cookie.get('user');
-	
+
 	async function onSubmit(e) {
 		const login = await mutateLogin({ username, password });
 		if (username.length > 0 && password.length > 0) {
@@ -42,7 +42,7 @@
 						}
 					});
 					cookie.set('user', username);
-					window.location.reload()
+					window.location.reload();
 				}
 			}
 		}
@@ -53,7 +53,7 @@
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
-{#if getUser != "null" }
+{#if getUser != 'null'}
 	<span
 		style="display: inline-block;font-size:2rem;font-weight: bold;margin-left:30%; margin-top: 200px;"
 		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
