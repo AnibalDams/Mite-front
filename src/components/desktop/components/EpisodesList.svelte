@@ -33,7 +33,7 @@
 
 	.item {
 		transition: 0.2;
-		text-decoration: none;
+		
 		cursor: pointer;
 		position: relative;
 	}
