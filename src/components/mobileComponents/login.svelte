@@ -42,6 +42,7 @@
 						}
 					});
 					cookie.set('user', username);
+					window.location.reload()
 				}
 			}
 		}
@@ -52,44 +53,44 @@
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
-{#if typeof getUser === 'string'}
-	<span
-		style="display: inline-block;font-size:2rem;font-weight: bold;text-align: center; margin-top: 200px;"
-		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
-	</span>
-{:else}
+{#if getUser === null || getUser === undefined || getUser === "null"} 
 	<div
 		class="main"
 		style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
 	>
-		<div style="height:80px;" />
 		<form class="form" on:submit|preventDefault={onSubmit}>
-			<h1>Iniciar Sesión</h1>
-			<input type="text" class="input" bind:value={username} placeholder="Nombre de usuario" />
-			<input type="password" bind:value={password} class="input" placeholder="contraseña" />
+			<h1 style="font-size:3rem;">Iniciar Sesión</h1>
+			<input type="text" bind:value={username} class="input" placeholder="Nombre de usuario" />
+			<input type="password" class="input" bind:value={password} placeholder="contraseña" />
 			<button type="submit" class="button">Iniciar Sesión</button>
 			<span style="font-size:1.1rem;font-weight:bold;display: inline-block;"
 				>¿No tienes una cuenta?. <a
-					href="/registrarse"
+					href="/signup"
 					style="text-decoration: none; border-bottom: 2px solid #eee;">¡Registrate!</a
 				></span
 			>
 		</form>
 	</div>
+{:else}
+<span
+		style="display: inline-block;font-size:2rem;font-weight: bold;margin-left:30%; margin-top: 200px;"
+		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
+	</span>
+	
 {/if}
 
 <style type="text/css">
 	.main {
 		max-width: 100%;
-		height: 400px;
+		height: 600px;
 		background-position: center;
 		background-size: cover;
+
 	}
 	.form {
 		width: 100%;
 		height: 100%;
 		display: flex;
-
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;

@@ -5,10 +5,7 @@
 	let opacity = 0;
 	let profileName = cookie.get('profileName');
 	let profileAvatar = cookie.get('profileAvatar');
-	if(profileName === undefined){
-
-		//profileName = "null"
-	}
+	
 </script>
 
 <nav class="navBar">

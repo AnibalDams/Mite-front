@@ -87,7 +87,7 @@
 <style type="text/css">
 	.main {
 		max-width: 100%;
-		height: 600px;
+		height:600px;
 		overflow: hidden;
 		background-position: center;
 		background-size: cover;
