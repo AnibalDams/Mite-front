@@ -90,7 +90,6 @@
 		padding-left: 15px;
 		padding-right: 15px;
 		padding-bottom: 15px;
-		max-height: 54px;
 		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
 		border: none;
@@ -105,7 +104,6 @@
 		color: #eee;
 	}
 	.search-button {
-		max-height: 54px;
 		text-decoration: none;
 		background: #eee;
 		border: none;
