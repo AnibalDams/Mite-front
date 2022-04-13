@@ -6,10 +6,31 @@
 
 	let user = '';
 	let profile;
-	let profileName="";
+	let profileName = '';
 	let newProfile = false;
-	let avatarSelected = "https://mite-api.herokuapp.com/img/meliodas_avatar.jpg"
-	let avatars = ["https://mite-api.herokuapp.com/img/kanna_avatar.gif","https://mite-api.herokuapp.com/img/karma_avatar.gif","https://mite-api.herokuapp.com/img/pikachu_avatar.gif","https://mite-api.herokuapp.com/img/bakugo_avatar.jpg","https://mite-api.herokuapp.com/img/chopper_avatar.jpg","https://mite-api.herokuapp.com/img/deku_avatar.jpg","https://mite-api.herokuapp.com/img/franki_avatar.jpg","https://mite-api.herokuapp.com/img/jinbei_avatar.jpg","https://mite-api.herokuapp.com/img/nami_avatar.jpg","https://mite-api.herokuapp.com/img/naruto_avatar.jpg","https://mite-api.herokuapp.com/img/robin_avatar.jpg","https://mite-api.herokuapp.com/img/sophie_avatar.jpg","https://mite-api.herokuapp.com/img/ussop_avatar.jpg","https://mite-api.herokuapp.com/img/meliodas_avatar.jpg","https://mite-api.herokuapp.com/img/luffy_avatar.jpg","https://mite-api.herokuapp.com/img/luffy_2_avatar.png","https://mite-api.herokuapp.com/img/gon_avatar.jpg","https://mite-api.herokuapp.com/img/eren_avatar.jpg","https://mite-api.herokuapp.com/img/goku_avatar.png","https://mite-api.herokuapp.com/img/zoro_avatar.jpg"]
+	let avatarSelected = 'https://mite-api.herokuapp.com/img/meliodas_avatar.jpg';
+	let avatars = [
+		'https://mite-api.herokuapp.com/img/kanna_avatar.gif',
+		'https://mite-api.herokuapp.com/img/karma_avatar.gif',
+		'https://mite-api.herokuapp.com/img/pikachu_avatar.gif',
+		'https://mite-api.herokuapp.com/img/bakugo_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/chopper_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/deku_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/franki_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/jinbei_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/nami_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/naruto_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/robin_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/sophie_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/ussop_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/meliodas_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/luffy_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/luffy_2_avatar.png',
+		'https://mite-api.herokuapp.com/img/gon_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/eren_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/goku_avatar.png',
+		'https://mite-api.herokuapp.com/img/zoro_avatar.jpg'
+	];
 	const queryAnimes = gql`
 		query ($user: String!) {
 			findAllProfiles(user: $user) {
@@ -21,10 +42,11 @@
 		}
 	`;
 	const all = operationStore(queryAnimes, { user }, { requestPolicy: 'cache-first' });
-	function setProfile(name, avatar) {
-		cookie.set('profileName', name);
+	function setProfile(id, name, avatar) {
+		cookie.set('profileName', id);
+
 		cookie.set('profileAvatar', avatar);
-		profile = name;
+		profile = id;
 		toast.push(`Perfil de ${name} seleccionado.`, {
 			theme: {
 				'--toastBackground': '#48BB78',
@@ -41,7 +63,7 @@
 		all.reexecute({ requestPolicy: 'network-only' });
 	});
 	query(all);
-const mutateProfile = mutation({
+	const mutateProfile = mutation({
 		query: `
       		mutation ($name: String!, $avatar: String!, $user:String!) {
 			  newProfile(name:$name,avatar:$avatar,user:$user)
@@ -51,26 +73,27 @@ const mutateProfile = mutation({
 	});
 
 	async function onSubmit(e) {
-		if (profileName.length >0 && profileName.length <=15) {
-			const createProfile = await mutateProfile({ name:profileName, avatar:avatarSelected, user });
-			window.location.reload()
-
-		}else if(profileName.length >=15){
-
-			toast.push("El nombre no puede ser mayor a 15 caracteres.", {
-						theme: {
-							'--toastBackground': '#F56565',
-							'--toastBarBackground': '#C53030'
-						}
-					});
-		}
-		else{
-			toast.push("Ingresa un nombre para el perfil.", {
-						theme: {
-							'--toastBackground': '#F56565',
-							'--toastBarBackground': '#C53030'
-						}
-					});
+		if (profileName.length > 0 && profileName.length <= 15) {
+			const createProfile = await mutateProfile({
+				name: profileName,
+				avatar: avatarSelected,
+				user
+			});
+			window.location.reload();
+		} else if (profileName.length >= 15) {
+			toast.push('El nombre no puede ser mayor a 15 caracteres.', {
+				theme: {
+					'--toastBackground': '#F56565',
+					'--toastBarBackground': '#C53030'
+				}
+			});
+		} else {
+			toast.push('Ingresa un nombre para el perfil.', {
+				theme: {
+					'--toastBackground': '#F56565',
+					'--toastBarBackground': '#C53030'
+				}
+			});
 		}
 	}
 </script>
@@ -80,68 +103,80 @@ const mutateProfile = mutation({
 </svelte:head>
 
 {#if $all.fetching != true && $all.data.findAllProfiles}
-<nav style=" width: 100%;display:flex; justify-content:space-between; align-items:center;">
-	<a
-	href="/"
-	style="display: inline-block;text-decoration:none; font-size:2rem;font-weight:bold; margin: 10px;"
-	>Ir al inicio</a
->
+	<nav style=" width: 100%;display:flex; justify-content:space-between; align-items:center;">
+		<a
+			href="/"
+			style="display: inline-block;text-decoration:none; font-size:2rem;font-weight:bold; margin: 10px;"
+			>Ir al inicio</a
+		>
 
-{#if newProfile}
-
-	<button on:click={onSubmit} style="margin: 20px; border-radius: 5px; cursor: pointer; padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;background:#eee;font-size: 1.1rem;font-weight: bold; color:#111; border: none; outline: none;">Crear Perfil</button>
-
-{/if}
-
-</nav>
+		{#if newProfile}
+			<button
+				on:click={onSubmit}
+				style="margin: 20px; border-radius: 5px; cursor: pointer; padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;background:#eee;font-size: 1.1rem;font-weight: bold; color:#111; border: none; outline: none;"
+				>Crear Perfil</button
+			>
+		{/if}
+	</nav>
 	{#if newProfile}
-	<div class="containerNew">
-	<h2 style="font-size:2rem;">Crea un nuevo perfil</h2>
-		<form class="formNew" on:submit|preventDefault={onSubmit}>
-			<input type="text" name="new" class="input" bind:value={profileName}  placeholder="Nombre del perfil">
-		</form>
-	<h2 style="font-size:2rem; margin-top: 30px;">Selecciona un avatar</h2>
-	<div class="avatarContainer">
-		{#each avatars as Avatar}
-
-			<img src={Avatar} style="border:{Avatar === avatarSelected? "2px solid #fff":"none"};" class="avatar" on:click={()=>{
-				avatarSelected = Avatar
-			}}>
-		{/each}
-		
-	</div>
-
-	</div>
-
+		<div class="containerNew">
+			<h2 style="font-size:2rem;">Crea un nuevo perfil</h2>
+			<form class="formNew" on:submit|preventDefault={onSubmit}>
+				<input
+					type="text"
+					name="new"
+					class="input"
+					bind:value={profileName}
+					placeholder="Nombre del perfil"
+				/>
+			</form>
+			<h2 style="font-size:2rem; margin-top: 30px;">Selecciona un avatar</h2>
+			<div class="avatarContainer">
+				{#each avatars as Avatar}
+					<img
+						src={Avatar}
+						style="border:{Avatar === avatarSelected ? '2px solid #fff' : 'none'};"
+						class="avatar"
+						on:click={() => {
+							avatarSelected = Avatar;
+						}}
+					/>
+				{/each}
+			</div>
+		</div>
 	{:else}
-	<div class="container">
-		<h3>Selecciona un perfil</h3>
-		<div class="profiles">
-			{#each all.data.findAllProfiles as Profile}
+		<div class="container">
+			<h3>Selecciona un perfil</h3>
+			<div class="profiles">
+				{#each all.data.findAllProfiles as Profile}
+					<button
+						class="profile"
+						on:click={() => {
+							setProfile(Profile.id, Profile.name, Profile.avatar);
+						}}
+					>
+						<img
+							src={Profile.avatar}
+							style="border:{Profile.id === profile ? '3px solid #fff' : 'none'}"
+						/>
+						<button class="edit" title={`Editar el perfil de ${Profile.name}`}>
+							<span class="material-icons-round" style="color:#0a0a0a;">edit</span>
+						</button>
+						<span class="name">{Profile.name}</span>
+					</button>
+				{/each}
 				<button
-					class="profile"
+					class="profile add"
+					title="Nuevo perfil"
 					on:click={() => {
-						setProfile(Profile.name, Profile.avatar);
+						newProfile = true;
 					}}
 				>
-					<img
-						src={Profile.avatar}
-					/>
-					<button class="edit" title={`Editar el perfil de ${Profile.name}`}>
-						<span class="material-icons-round" style="color:#0a0a0a;">edit</span>
-					</button>
-					<span class="name">{Profile.name}</span>
+					<span class="material-icons-round">add</span>
 				</button>
-			{/each}
-			<button class="profile add" title="Nuevo perfil" on:click={()=>{
-				newProfile = true
-			}}>
-				<span class="material-icons-round">add</span>
-			</button>
+			</div>
 		</div>
-	</div>
 	{/if}
-	
 {/if}
 
 <style type="text/css">
@@ -230,24 +265,25 @@ const mutateProfile = mutation({
 		right: 0;
 		bottom: 0;
 		background: #f1f1f1;
+
 		border-radius: 50%;
 		opacity: 0;
 		border: 3px solid rgb(13, 13, 13);
 		cursor: pointer;
 	}
-	.edit:hover{
+	.edit:hover {
 		transform: scale(1.3);
 	}
 	.profile:hover .edit {
 		top: 65%;
 		opacity: 1;
 	}
-	.containerNew{
+	.containerNew {
 		margin: 20px;
 		max-width: 100%;
 	}
-	.input{
-		background: rgba(10, 10, 10, 1.0);
+	.input {
+		background: rgba(10, 10, 10, 1);
 		padding: 10px;
 		height: 40px;
 		width: 90%;
@@ -258,21 +294,19 @@ const mutateProfile = mutation({
 		border-radius: 5px;
 		outline: none;
 	}
-	.avatarContainer{
+	.avatarContainer {
 		width: 100%;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		flex-wrap: wrap;
 	}
-	.avatar{
+	.avatar {
 		margin-top: 20px;
 		margin-right: 40px;
 		cursor: pointer;
 	}
-	.avatar:hover{
+	.avatar:hover {
 		opacity: 0.5;
 	}
-
-
 </style>

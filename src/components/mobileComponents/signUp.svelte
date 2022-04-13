@@ -5,7 +5,6 @@
 	import cookie from 'cookie-cutter';
 	import { onMount } from 'svelte';
 
-
 	export let image;
 	let username = '';
 	let password = '';
@@ -19,14 +18,14 @@
 		}
     `
 	});
-	let getUser ="";
-	onMount(()=>{
-			getUser =  cookie.get('user')
-	})
+	let getUser = '';
+	onMount(() => {
+		getUser = cookie.get('user');
+	});
 
 	async function onSubmit(e) {
 		const login = await mutateLogin({ username, password });
-		console.log(login)
+		console.log(login);
 		if (username.length > 0 && password.length > 0) {
 			if (login.data.newUser) {
 				if (
@@ -46,7 +45,7 @@
 							'--toastBarBackground': '#2F855A'
 						}
 					});
-					
+
 					window.location.reload();
 				}
 			}
@@ -58,7 +57,7 @@
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
-{#if getUser === null || getUser === undefined || getUser === "null"}
+{#if getUser === null || getUser === undefined || getUser === 'null'}
 	<div
 		class="main"
 		style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
@@ -77,17 +76,16 @@
 		</form>
 	</div>
 {:else}
-<span
+	<span
 		style="display: inline-block;font-size:2rem;font-weight: bold;margin-left:30%; margin-top: 200px;"
 		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
 	</span>
-	
 {/if}
 
 <style type="text/css">
 	.main {
 		max-width: 100%;
-		height:600px;
+		height: 600px;
 		overflow: hidden;
 		background-position: center;
 		background-size: cover;

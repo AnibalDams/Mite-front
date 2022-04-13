@@ -1,36 +1,27 @@
 <script>
-	import cookie from 'cookie-cutter'
+	import cookie from 'cookie-cutter';
 
 	let profileName = cookie.get('profileName');
 	let profileAvatar = cookie.get('profileAvatar');
-	
-
-
 </script>
 
 <nav>
 	<h1>Descubre</h1>
 	<div class="icons">
 		<!--<a href="#"><span class="material-icons-round">translate</span></a>-->
-		
-		{#if profileName === null || profileName === undefined  || profileName === "null"}
-		<div class="buttonGroup">
-			<a href="/buscar" class="button"><span class="material-icons-round">search</span></a>
-			<a href="/login" class="button"><span class="material-icons-round">account_circle</span></a>
-		</div>
-	{:else}
-		<div class="buttonGroup">
-			<a href="/buscar" class="button"><span class="material-icons-round">search</span></a>
-			<div class="avatarZone">
-			<img
-				src={profileAvatar}
-				class="avatar"
-				
-			/>
-		</div>
-	
 
-		</div>
+		{#if profileName === null || profileName === undefined || profileName === 'null'}
+			<div class="buttonGroup">
+				<a href="/buscar" class="button"><span class="material-icons-round">search</span></a>
+				<a href="/login" class="button"><span class="material-icons-round">account_circle</span></a>
+			</div>
+		{:else}
+			<div class="buttonGroup">
+				<a href="/buscar" class="button"><span class="material-icons-round">search</span></a>
+				<div class="avatarZone">
+					<img src={profileAvatar} class="avatar" />
+				</div>
+			</div>
 		{/if}
 	</div>
 </nav>
@@ -67,7 +58,7 @@
 	.icons a:hover {
 		opacity: 0.5;
 	}
-	.buttonGroup{
+	.buttonGroup {
 		display: flex;
 		justify-content: center;
 		align-items: center;

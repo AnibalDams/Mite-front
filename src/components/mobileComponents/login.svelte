@@ -42,7 +42,7 @@
 						}
 					});
 					cookie.set('user', username);
-					window.location.reload()
+					window.location.reload();
 				}
 			}
 		}
@@ -53,7 +53,7 @@
 	<title>Iniciar Sesión - AnimeMite</title>
 </svelte:head>
 
-{#if getUser === null || getUser === undefined || getUser === "null"} 
+{#if getUser === null || getUser === undefined || getUser === 'null'}
 	<div
 		class="main"
 		style="background-image: linear-gradient(to  top   ,rgb(13,13,13) ,transparent 50%), linear-gradient(to  right,rgb(13,13,13) ,transparent 50%),linear-gradient(to  bottom,rgb(13,13,13) ,transparent 50%),linear-gradient(to  left,rgb(13,13,13) ,transparent 50%),url({image});"
@@ -72,11 +72,10 @@
 		</form>
 	</div>
 {:else}
-<span
+	<span
 		style="display: inline-block;font-size:2rem;font-weight: bold;margin-left:30%; margin-top: 200px;"
 		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
 	</span>
-	
 {/if}
 
 <style type="text/css">
@@ -85,7 +84,6 @@
 		height: 600px;
 		background-position: center;
 		background-size: cover;
-
 	}
 	.form {
 		width: 100%;

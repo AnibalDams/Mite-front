@@ -8,8 +8,8 @@
 	// 24
 	export let episodeData;
 	let width;
-			//on:slideChange={}
-		//on:swiper={}
+	//on:slideChange={}
+	//on:swiper={}
 </script>
 
 <svelte:window bind:innerWidth={width} />
@@ -20,7 +20,6 @@
 		spaceBetween={50}
 		slidesPerView={3}
 		navigation
-
 		style="margin:30px;"
 	>
 		{#each episodeData as episode}
@@ -60,7 +59,6 @@
 		spaceBetween={50}
 		slidesPerView={4}
 		navigation
-
 		style="margin:30px;"
 	>
 		{#each episodeData as episode}

@@ -4,7 +4,9 @@
 	import AnimeList from '../components/coverList.svelte';
 	export let anime;
 	export let episodes;
+
 	let genres = anime.genres.sort();
+	let genreN = Math.floor(Math.random() * (genres.length - 0 * 1) + 0);
 	import { gql, operationStore, query } from '@urql/svelte';
 	const queryAnimes = gql`
 		query ($genre: String!) {
@@ -19,7 +21,7 @@
 			}
 		}
 	`;
-	const all = operationStore(queryAnimes, { genre: genres[0] });
+	const all = operationStore(queryAnimes, { genre: genres[genreN] });
 	query(all);
 </script>
 

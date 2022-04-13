@@ -1,11 +1,64 @@
 <script type="text/javascript">
 	import NavBar from './navbar.svelte';
 	import EpisodesList from './EpisodesList.svelte';
+	import cookie from 'cookie-cutter';
+	import { gql, operationStore, query, mutation } from '@urql/svelte';
+
 	export let anime;
+	let profileName = cookie.get('profileName');
 	let genres = anime.genres.sort();
 	export let episodes;
 	let color = anime.onGoing ? '#04b31b' : '#333633';
 	let visible = false;
+
+	const queryAnimes = gql`
+		query ($animeId: String!, $userProfile: String!) {
+			findAnimeInList(animeId: $animeId, userProfile: $userProfile) {
+				_id
+				animeId
+			}
+		}
+	`;
+	const all = operationStore(queryAnimes, { animeId: anime.id, userProfile: profileName });
+	query(all);
+
+	const addOrDeleteAnimeInList = async (animeId) => {
+		if ($all.data.findAnimeInList.animeId === null) {
+			const addAnime = mutation({
+				query: `
+      		mutation ($animeId: String!, $animeName: String!, $animeSynopsis:String!,$animeMain:String!,$animeCover:String!,$userProfile:String!) {
+			    addAnimeToList(animeId:$animeId,animeName:$animeName,animeSynopsis:$animeSynopsis,animeMain:$animeMain,animeCover:$animeCover,userProfile:$userProfile)
+
+
+		}
+    `
+			});
+			const add = await addAnime({
+				animeId: anime.id,
+				animeName: anime.name,
+				animeSynopsis: anime.synopsis,
+				animeMain: anime.image,
+				animeCover: anime.cover,
+				userProfile: profileName
+			});
+			$all.variables = { animeId: anime.id, userProfile: profileName };
+
+			all.reexecute({ requestPolicy: 'network-only' });
+		} else {
+			const deleteAnime = mutation({
+				query: `
+      		mutation ($animeId: String!) {
+			    deleteAnimeInList(animeId:$animeId,secretKey:"anibalDams")
+
+
+		}
+    `
+			});
+			const _delete = await deleteAnime({ animeId: $all.data.findAnimeInList._id });
+			$all.variables = { animeId: anime.id, userProfile: profileName };
+			all.reexecute({ requestPolicy: 'network-only' });
+		}
+	};
 </script>
 
 <div
@@ -31,6 +84,15 @@
 		</div>
 		{#if episodes[0].message != 'Este anime no cuenta con ningun episodio aun.'}
 			<a href={`/anime/episodio/${anime.id}/1`} class="button">Ver episodio 1</a>
+		{/if}
+		{#if profileName === null || profileName === undefined || profileName === 'null'}
+			<div />
+		{:else}
+			<button class="buttonOutlined" on:click={() => addOrDeleteAnimeInList()}
+				>{$all.fetching === false && $all.data.findAnimeInList.animeId === null
+					? 'Agregar anime a la lista'
+					: 'Remover anime de la lista'}</button
+			>
 		{/if}
 	</div>
 	<div class="right">
@@ -145,6 +207,25 @@
 		border-radius: 5px;
 	}
 	.button:hover {
+		opacity: 0.5;
+	}
+	.buttonOutlined {
+		text-decoration: none;
+		margin-top: 20px;
+		padding-top: 20px;
+
+		padding-bottom: 20px;
+		width: 195px;
+		border: 1px solid #eee;
+		color: #eee;
+		background: transparent;
+		cursor: pointer;
+		font-size: 1.2rem;
+		font-weight: bold;
+		text-align: center;
+		border-radius: 5px;
+	}
+	.buttonOutlined:hover {
 		opacity: 0.5;
 	}
 	.right {
