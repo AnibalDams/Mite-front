@@ -109,8 +109,8 @@
 		border: none;
 		padding-left: 15px;
 		padding-right: 15px;
-		padding-top: 15px;
-		padding-bottom: 15px;
+		padding-top: 16px;
+		padding-bottom: 16px;
 		cursor: pointer;
 		border-top-right-radius: 5px;
 		border-bottom-right-radius: 5px;
