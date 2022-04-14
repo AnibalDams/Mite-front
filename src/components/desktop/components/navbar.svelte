@@ -1,22 +1,11 @@
 <script type="text/javascript">
 	let search = '';
 	import cookie from 'cookie-cutter';
-	import { gql, operationStore, query } from '@urql/svelte';
 
 	let opacity = 0;
 	let profileName = cookie.get('profileName');
 	let profileAvatar = cookie.get('profileAvatar');
 
-	const queryProfileName = gql`
-		query ($profile: String!) {
-			 
-  			 	selectUserProfile(id:$profile){
-    				name
- 				 }
-		}
-	`;
-	const all = operationStore(queryProfileName, { profile:profileName }, { requestPolicy: 'cache-first' });
-	query(all)
 
 </script>
 
@@ -58,7 +47,7 @@
 			<img
 				src={profileAvatar}
 				class="avatar"
-				title={$all.fetching === false? $all.data.selectUserProfile.name:"cargando"}
+				
 				on:click={() => {
 					if (opacity === 0) {
 						opacity = 1;
