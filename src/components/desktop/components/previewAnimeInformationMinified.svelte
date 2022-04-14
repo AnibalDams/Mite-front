@@ -14,7 +14,7 @@
 			><span class="material-icons-round" style="color:inherit;"> add </span>Más detalles
 		</a>
 
-		<a href={`/anime/episodio/${animeData.id || animeData.id}/1`} class="button" id="watch-now"
+		<a href={`/anime/episodio/${animeData.id || animeData.animeId}/1`} class="button" id="watch-now"
 			><span class="material-icons-round"> play_arrow </span>Ver ahora</a
 		>
 	</div>

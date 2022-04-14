@@ -24,7 +24,8 @@
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
 	</form>
-	<div class="dropDown" style="opacity: {opacity};visibility: {opacity === 1?"visible":"hidden"};">
+		
+	<div class="dropDown" style="top: {opacity === 1?90: 80}%;opacity: {opacity};visibility: {opacity === 1?"visible":"hidden"};">
 		<a class="dropDownOption" href="/milista">Mi Lista</a>
 		<a class="dropDownOption" href="/selectProfile">Cambiar de perfil</a>
 		<a
@@ -168,7 +169,6 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-		top: 90%;
 		left: 86%;
 		right: 0;
 		bottom: 0;

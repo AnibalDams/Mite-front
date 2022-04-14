@@ -122,8 +122,8 @@
 	>
 		<span
 			style="display: inline-block;margin-top: 270px;margin-left: 10px;height: 300px;margin-right: 10px;font-size: 1.2rem;font-weight: bold;"
-			>{$all.data['findAnime'].name} no cuenta con ningun episodio aun.
-			<a href={`/anime/${$all.data['findAnime'].id}`} style="text-decoration: underline;">Volver.</a
+			>{$all.data['findAnime'].name} no cuenta con ningun episodio, aun.
+			<a on:click={()=>window.history.back()} style="text-decoration: underline;">Volver.</a
 			></span
 		>
 	</div>
