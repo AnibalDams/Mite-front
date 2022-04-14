@@ -6,7 +6,6 @@
 </script>
 
 <NavBar />
-
 {#if data[0].message === 'No se encontro nungun anime.'}
 	<span>No se encontro ningun anime.</span>
 {:else}
@@ -25,7 +24,7 @@
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		margin: 30px;
+		margin: 40px;
 		font-size: 2rem;
 		font-weight: 400;
 	}

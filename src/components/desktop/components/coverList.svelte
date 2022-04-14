@@ -124,7 +124,7 @@
 <style>
 	.list {
 		max-width: 100%;
-		margin: 30px;
+		margin: 40px;
 		--auto-grid-min-size: 13rem;
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));

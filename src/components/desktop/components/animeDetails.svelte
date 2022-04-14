@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	import NavBar from './navbar.svelte';
+	
 	import EpisodesList from './EpisodesList.svelte';
 	import cookie from 'cookie-cutter';
 	import { gql, operationStore, query, mutation } from '@urql/svelte';
@@ -10,7 +11,7 @@
 	export let episodes;
 	let color = anime.onGoing ? '#04b31b' : '#333633';
 	let visible = false;
-
+	let loading = false;
 	const queryAnimes = gql`
 		query ($animeId: String!, $userProfile: String!) {
 			findAnimeInList(animeId: $animeId, userProfile: $userProfile) {
@@ -19,46 +20,56 @@
 			}
 		}
 	`;
-	const all = operationStore(queryAnimes, { animeId: anime.id, userProfile: profileName });
-	query(all);
-
-	const addOrDeleteAnimeInList = async (animeId) => {
-		if ($all.data.findAnimeInList.animeId === null) {
-			const addAnime = mutation({
-				query: `
+	const addAnime = mutation({
+		query: `
       		mutation ($animeId: String!, $animeName: String!, $animeSynopsis:String!,$animeMain:String!,$animeCover:String!,$userProfile:String!) {
 			    addAnimeToList(animeId:$animeId,animeName:$animeName,animeSynopsis:$animeSynopsis,animeMain:$animeMain,animeCover:$animeCover,userProfile:$userProfile)
 
 
 		}
     `
-			});
-			const add = await addAnime({
-				animeId: anime.id,
-				animeName: anime.name,
-				animeSynopsis: anime.synopsis,
-				animeMain: anime.image,
-				animeCover: anime.cover,
-				userProfile: profileName
-			});
-			$all.variables = { animeId: anime.id, userProfile: profileName };
-
-			all.reexecute({ requestPolicy: 'network-only' });
-		} else {
-			const deleteAnime = mutation({
-				query: `
+	});
+	const deleteAnime = mutation({
+		query: `
       		mutation ($animeId: String!) {
 			    deleteAnimeInList(animeId:$animeId,secretKey:"anibalDams")
 
 
 		}
     `
-			});
-			const _delete = await deleteAnime({ animeId: $all.data.findAnimeInList._id });
-			$all.variables = { animeId: anime.id, userProfile: profileName };
-			all.reexecute({ requestPolicy: 'network-only' });
-		}
-	};
+	});
+	const all = operationStore(queryAnimes, { animeId: anime.id, userProfile: profileName });
+
+	
+	
+	let addOrDeleteAnimeInList = async function () {
+			if ($all.data.findAnimeInList.animeId === null) {
+				loading = true;
+				await addAnime({
+					animeId: anime.id,
+					animeName: anime.name,
+					animeSynopsis: anime.synopsis,
+					animeMain: anime.image,
+					animeCover: anime.cover,
+					userProfile: profileName
+				});
+
+				$all.variables = { animeId: anime.id, userProfile: profileName };
+
+				all.reexecute({ requestPolicy: 'network-only' });
+
+				loading = false;
+			} else {
+				loading = true;
+				await deleteAnime({ animeId: $all.data.findAnimeInList._id });
+
+				$all.variables = { animeId: anime.id, userProfile: profileName };
+				all.reexecute({ requestPolicy: 'network-only' });
+				loading = false;
+			}
+		};
+	
+	query(all);
 </script>
 
 <div
@@ -88,10 +99,12 @@
 		{#if profileName === null || profileName === undefined || profileName === 'null'}
 			<div />
 		{:else}
-			<button class="buttonOutlined" on:click={() => addOrDeleteAnimeInList()}
-				>{$all.fetching === false && $all.data.findAnimeInList.animeId === null
-					? 'Agregar anime a la lista'
-					: 'Remover anime de la lista'}</button
+			<button class="buttonOutlined" style="cursor: {loading?"default":"pointer"};" on:click={addOrDeleteAnimeInList}
+				>{loading || $all.fetching
+					? 'Cargando...'
+					: $all.fetching === false && $all.data.findAnimeInList.animeId === null
+					? 'Agregar a mi lista'
+					: 'Remover de mi lista'}</button
 			>
 		{/if}
 	</div>
@@ -151,7 +164,7 @@
 		text-decoration: none;
 	}
 	.information {
-		margin: 50px;
+		margin: 40px;
 		display: flex;
 		flex-direction: row;
 	}
@@ -213,15 +226,13 @@
 		text-decoration: none;
 		margin-top: 20px;
 		padding-top: 20px;
-
 		padding-bottom: 20px;
 		width: 195px;
 		border: 1px solid #eee;
 		color: #eee;
 		background: transparent;
-		cursor: pointer;
 		font-size: 1.2rem;
-		font-weight: bold;
+		font-weight: thin;
 		text-align: center;
 		border-radius: 5px;
 	}

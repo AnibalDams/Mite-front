@@ -33,7 +33,7 @@
 		<NavBar />
 		<AnimeDetails {anime} {episodes} />
 
-		<p style="margin:30px;font-size: 2rem;font-weight: bold;">Tambien podria gustarte</p>
+		<p style="margin:40px;font-size: 2rem;font-weight: bold;">Tambien podria gustarte</p>
 
 		<AnimeList
 			data={$all.data['findAnimeByGenre'].sort(function (a, b) {

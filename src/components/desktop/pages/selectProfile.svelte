@@ -8,8 +8,8 @@
 	let profile;
 	let profileName = '';
 	let newProfile = false;
-	let avatarSelected = 'https://mite-api.herokuapp.com/img/meliodas_avatar.jpg';
 	let avatars = [
+		'https://mite-api.herokuapp.com/img/boji_avatar.gif',
 		'https://mite-api.herokuapp.com/img/kanna_avatar.gif',
 		'https://mite-api.herokuapp.com/img/karma_avatar.gif',
 		'https://mite-api.herokuapp.com/img/pikachu_avatar.gif',
@@ -17,11 +17,14 @@
 		'https://mite-api.herokuapp.com/img/chopper_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/deku_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/franki_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/itadori_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/jinbei_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/nami_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/naruto_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/nishikata_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/robin_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/sophie_avatar.jpg',
+		'https://mite-api.herokuapp.com/img/takagi_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/ussop_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/meliodas_avatar.jpg',
 		'https://mite-api.herokuapp.com/img/luffy_avatar.jpg',
@@ -31,6 +34,7 @@
 		'https://mite-api.herokuapp.com/img/goku_avatar.png',
 		'https://mite-api.herokuapp.com/img/zoro_avatar.jpg'
 	];
+	let avatarSelected = Math.floor(Math.random() * (avatars.length - 0 * 1) + 0);
 	const queryAnimes = gql`
 		query ($user: String!) {
 			findAllProfiles(user: $user) {

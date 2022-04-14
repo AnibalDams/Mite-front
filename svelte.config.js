@@ -3,12 +3,15 @@ import adapter from '@sveltejs/adapter-auto';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
 
-		// // Override http methods in the Todo forms
-		// methodOverride: {
-		// 	allowed: ['PATCH', 'DELETE']
-		// }
+		// Override http methods in the Todo forms
+		methodOverride: {
+			allowed: ['PATCH', 'DELETE']
+		}
+	},
+	optimizeDeps: {
+		exclude: ['@urql/svelte']
 	}
 };
 

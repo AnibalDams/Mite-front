@@ -72,7 +72,7 @@
 	</div>
 {:else}
 	<span
-		style="display: inline-block;font-size:2rem;font-weight: bold;margin-left:30%; margin-top: 200px;"
+		style="display: block;font-size:2rem;font-weight: bold;text-align: center; margin-top: 200px;"
 		>Ya has iniciado sesion. <a href="/selectProfile">Selecciona un perfil</a>
 	</span>
 {/if}

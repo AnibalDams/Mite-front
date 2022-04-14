@@ -1,5 +1,5 @@
 <script>
-	// import Actions from './detailsPageActions.svelte';
+	 import Actions from './detailsPageActions.svelte';
 	import GenreList from './MobileGenreList.svelte';
 
 	export let data;
@@ -44,6 +44,7 @@
 			{/if}
 		</div>
 	</div>
+		<Actions anime={data.id} animeData={data}/>
 	<p style="color:#aaa; padding:5px;margin-top:20px;">
 		{data.synopsis}
 	</p>

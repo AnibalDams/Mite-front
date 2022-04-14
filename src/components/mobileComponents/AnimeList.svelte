@@ -28,18 +28,7 @@
 </section>
 
 <style type="text/css">
-	* {
-		transition: 0.5s;
-		overflow: hidden;
-		color: #eee;
-	}
-	.form {
-		width: 100%;
-		margin-top: 10px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+	
 
 	.result {
 		display: flex;
