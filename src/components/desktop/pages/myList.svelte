@@ -68,7 +68,7 @@
 	<NavBar/>
 	<PreviewAnimeInformationMinified animeData={animeR}/>
 <span class="text-big" style="margin-top: 100px;display: flex; align-items: center;"><span class="material-icons-round" style="margin-right: 10px;">list</span>  Mi lista</span>
-<AnimeList data={$all.data.findAnimesInList}/>s
+<AnimeList data={$all.data.findAnimesInList}/>
 </main>
 
 	{/if}
