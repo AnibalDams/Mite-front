@@ -34,7 +34,8 @@
 		'https://mite-api.herokuapp.com/img/goku_avatar.png',
 		'https://mite-api.herokuapp.com/img/zoro_avatar.jpg'
 	];
-	let avatarSelected = Math.floor(Math.random() * (avatars.length - 0 * 1) + 0);
+	let numeroRandom = Math.floor(Math.random() * (avatars.length - 0 * 1) + 0)
+	let avatarSelected = avatars[numeroRandom];
 	const queryAnimes = gql`
 		query ($user: String!) {
 			findAllProfiles(user: $user) {
