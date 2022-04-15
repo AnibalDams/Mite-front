@@ -5,7 +5,9 @@
 <main class="preview-anime-information">
 	<h2 class="anime-title">{animeData.animeName || animeData.name}</h2>
 	{#if animeData.animeSynopsis.length > 390}
-		<p class="synopsis">{animeData.animeSynopsis.substring(0, 390) || animeData.synopsis.substring(0, 390)}...</p>
+		<p class="synopsis">
+			{animeData.animeSynopsis.substring(0, 390) || animeData.synopsis.substring(0, 390)}...
+		</p>
 	{:else}
 		<p class="synopsis">{animeData.animeSynopsis || animeData.synopsis}</p>
 	{/if}

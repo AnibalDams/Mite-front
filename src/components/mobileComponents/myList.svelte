@@ -4,49 +4,48 @@
 	import AnimeList from './AnimeList.svelte';
 	import { gql, operationStore, query } from '@urql/svelte';
 	import cookie from 'cookie-cutter';
-	
-	let profile = "n";
-	
+
+	let profile = 'n';
 
 	const queryAnimes = gql`
 		query ($profile: String!) {
-			 findAnimesInList(userProfile:$profile){
-				    message
-				    _id
-				    animeId
-				    animeName
-				    animeSynopsis
-				    animeMain
-				    animeCover
-				    userProfile
-				    createdAt
-				    
-  			}
-  			 	selectUserProfile(id:$profile){
-    				name
- 				 }
+			findAnimesInList(userProfile: $profile) {
+				message
+				_id
+				animeId
+				animeName
+				animeSynopsis
+				animeMain
+				animeCover
+				userProfile
+				createdAt
+			}
+			selectUserProfile(id: $profile) {
+				name
+			}
 		}
 	`;
 	const all = operationStore(queryAnimes, { profile }, { requestPolicy: 'cache-first' });
-	query(all)
-
+	query(all);
 
 	onMount(() => {
-		
 		profile = cookie.get('profileName');
 
 		$all.variables = { profile };
 
 		all.reexecute({ requestPolicy: 'network-only' });
 	});
-
 </script>
 
-
 <svelte:head>
-	<title>Lista de {profile === null || profile === undefined || profile === 'null'? "Nadie":$all.fetching === false?$all.data.selectUserProfile.name:"cargando"} - AnimeMite</title>
+	<title
+		>Lista de {profile === null || profile === undefined || profile === 'null'
+			? 'Nadie'
+			: $all.fetching === false
+			? $all.data.selectUserProfile.name
+			: 'cargando'} - AnimeMite</title
+	>
 </svelte:head>
-
 
 {#if profile !== null || profile !== undefined || profile !== 'null'}
 	<h3 class="text">Mi lista</h3>
@@ -55,12 +54,10 @@
 			><span class="material-icons-round">arrow_back</span></button
 		>
 	</nav>
-	
-<section class="result">
-		{#if $all.fetching === false}
 
-		{#each $all.data.findAnimesInList as anime}
-			
+	<section class="result">
+		{#if $all.fetching === false}
+			{#each $all.data.findAnimesInList as anime}
 				<a href={`/anime/${anime.animeId}`} class="item">
 					<img class="cover" loading="lazy" alt={anime.animeName} src={anime.animeCover} />
 					{#if anime.animeName.length >= 25}
@@ -71,20 +68,17 @@
 						<span class="title">{anime.animeName}</span>
 					{/if}
 				</a>
-			
-		{/each}
-	
-
+			{/each}
 		{/if}
-</section>
+	</section>
 {:else}
-<a href="/" class="text-big" style="font-size: 2rem;font-weight: bold; display: block; text-align: center;  margin-top:300px; text-decoration: none;">Volver al inicio</a>
-
-
+	<a
+		href="/"
+		class="text-big"
+		style="font-size: 2rem;font-weight: bold; display: block; text-align: center;  margin-top:300px; text-decoration: none;"
+		>Volver al inicio</a
+	>
 {/if}
-
-
-
 
 <style type="text/css">
 	.navBar {
@@ -103,7 +97,6 @@
 		font-size: 1.5rem;
 	}
 
-		
 	.result {
 		display: flex;
 		flex-direction: row;
@@ -147,5 +140,4 @@
 	.icon-button:active {
 		opacity: 0.5;
 	}
-
 </style>

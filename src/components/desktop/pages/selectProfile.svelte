@@ -7,8 +7,8 @@
 	let user = '';
 	let profile;
 	let profileName = '';
-	let profileId ="";
-	let profileId2 ="";
+	let profileId = '';
+	let profileId2 = '';
 	let newProfile = false;
 	let editProfile = false;
 	let avatars = [
@@ -37,7 +37,7 @@
 		'https://mite-api.herokuapp.com/img/goku_avatar.png',
 		'https://mite-api.herokuapp.com/img/zoro_avatar.jpg'
 	];
-	let numeroRandom = Math.floor(Math.random() * (avatars.length - 0 * 1) + 0)
+	let numeroRandom = Math.floor(Math.random() * (avatars.length - 0 * 1) + 0);
 	let avatarSelected = avatars[numeroRandom];
 	const queryAnimes = gql`
 		query ($user: String!) {
@@ -52,19 +52,18 @@
 	`;
 	const all = operationStore(queryAnimes, { user }, { requestPolicy: 'cache-first' });
 	function setProfile(id, name, avatar) {
-		if(profileId.length === 0){
+		if (profileId.length === 0) {
 			cookie.set('profileName', id);
 
-		cookie.set('profileAvatar', avatar);
-		profile = id;
-		toast.push(`Perfil de ${name} seleccionado.`, {
-			theme: {
-				'--toastBackground': '#48BB78',
-				'--toastBarBackground': '#2F855A'
-			}
-		});
+			cookie.set('profileAvatar', avatar);
+			profile = id;
+			toast.push(`Perfil de ${name} seleccionado.`, {
+				theme: {
+					'--toastBackground': '#48BB78',
+					'--toastBarBackground': '#2F855A'
+				}
+			});
 		}
-		
 	}
 	onMount(() => {
 		user = cookie.get('user');
@@ -84,7 +83,7 @@
     `
 	});
 
-const editProfileFunc = mutation({
+	const editProfileFunc = mutation({
 		query: `
       		mutation ($profileId:String!,$name: String!, $avatar: String!) {
 			    editUserProfile(profileId:$profileId,profileName:$name,profileAvatar:$avatar)
@@ -93,7 +92,7 @@ const editProfileFunc = mutation({
 		}
     `
 	});
-const deleteProfileFunc = mutation({
+	const deleteProfileFunc = mutation({
 		query: `
       		mutation ($profileId:String!) {
 			    deleteUserProfile(profileId:$profileId)
@@ -103,91 +102,84 @@ const deleteProfileFunc = mutation({
     `
 	});
 	async function deleteUserProfile() {
-		toast.push('Eliminando Perfil...')
-		 await deleteProfileFunc({
-				profileId,
+		toast.push('Eliminando Perfil...');
+		await deleteProfileFunc({
+			profileId
 		});
-		 if(profileId2 === profile){
-		 				cookie.set('profileName', null);
+		if (profileId2 === profile) {
+			cookie.set('profileName', null);
 
-		cookie.set('profileAvatar', null);
-		 }
-		toast.push('Perfil Eliminado.')
+			cookie.set('profileAvatar', null);
+		}
+		toast.push('Perfil Eliminado.');
 		$all.variables = { user };
 
 		all.reexecute({ requestPolicy: 'network-only' });
-		profileId =""
-
-		
+		profileId = '';
 	}
 	async function onSubmit(e) {
-		if(editProfile){
+		if (editProfile) {
+			if (profileName.length > 0 && profileName.length <= 15) {
+				const edit = await editProfileFunc({
+					profileId,
+					name: profileName,
+					avatar: avatarSelected,
+					user
+				});
 
-		if (profileName.length > 0 && profileName.length <= 15) {
-			
-			const edit = await editProfileFunc({
-				profileId,
-				name: profileName,
-				avatar: avatarSelected,
-				user
-			});
-			
-			newProfile = false
-			editProfile = false
-			profileName = "";
+				newProfile = false;
+				editProfile = false;
+				profileName = '';
 
-		cookie.set('profileAvatar', avatarSelected);
-		$all.variables = { user };
+				cookie.set('profileAvatar', avatarSelected);
+				$all.variables = { user };
 
-		all.reexecute({ requestPolicy: 'network-only' });
-		profileId =""
-
-
-		} else if (profileName.length >= 15) {
-			toast.push('El nombre no puede ser mayor a 15 caracteres.', {
-				theme: {
-					'--toastBackground': '#F56565',
-					'--toastBarBackground': '#C53030'
-				}
-			});
+				all.reexecute({ requestPolicy: 'network-only' });
+				profileId = '';
+			} else if (profileName.length >= 15) {
+				toast.push('El nombre no puede ser mayor a 15 caracteres.', {
+					theme: {
+						'--toastBackground': '#F56565',
+						'--toastBarBackground': '#C53030'
+					}
+				});
+			} else {
+				toast.push('Ingresa un nombre para el perfil.', {
+					theme: {
+						'--toastBackground': '#F56565',
+						'--toastBarBackground': '#C53030'
+					}
+				});
+			}
 		} else {
-			toast.push('Ingresa un nombre para el perfil.', {
-				theme: {
-					'--toastBackground': '#F56565',
-					'--toastBarBackground': '#C53030'
-				}
-			});
-		}
-		}else{
+			if (profileName.length > 0 && profileName.length <= 15) {
+				const createProfile = await mutateProfile({
+					name: profileName,
+					avatar: avatarSelected,
+					user
+				});
+				newProfile = false;
+				editProfile = false;
+				profileName = '';
+				$all.variables = { user };
 
-		if (profileName.length > 0 && profileName.length <= 15) {
-			const createProfile = await mutateProfile({
-				name: profileName,
-				avatar: avatarSelected,
-				user
-			});
-						newProfile = false
-			editProfile = false
-			profileName = ""
-		$all.variables = { user };
-
-		all.reexecute({ requestPolicy: 'network-only' });
-		profileId =""
-		} else if (profileName.length >= 15) {
-			toast.push('El nombre no puede ser mayor a 15 caracteres.', {
-				theme: {
-					'--toastBackground': '#F56565',
-					'--toastBarBackground': '#C53030'
-				}
-			});
-		} else {
-			toast.push('Ingresa un nombre para el perfil.', {
-				theme: {
-					'--toastBackground': '#F56565',
-					'--toastBarBackground': '#C53030'
-				}
-			});
-		}
+				all.reexecute({ requestPolicy: 'network-only' });
+				profileId = '';
+			} else if (profileName.length >= 15) {
+				toast.push('El nombre no puede ser mayor a 15 caracteres.', {
+					theme: {
+						'--toastBackground': '#F56565',
+						'--toastBarBackground': '#C53030'
+					}
+				});
+			} else {
+				toast.push('Ingresa un nombre para el perfil.', {
+					theme: {
+						'--toastBackground': '#F56565',
+						'--toastBarBackground': '#C53030'
+					}
+				});
+			}
 		}
 	}
 </script>
@@ -206,12 +198,12 @@ const deleteProfileFunc = mutation({
 
 		{#if newProfile}
 			<button
-				on:click={()=>{
-					profileId = "";
-					profileName = "";
+				on:click={() => {
+					profileId = '';
+					profileName = '';
 					newProfile = false;
 					editProfile = false;
-					avatarSelected = avatars[numeroRandom]
+					avatarSelected = avatars[numeroRandom];
 				}}
 				style="margin: 20px; border-radius: 5px; cursor: pointer; padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;background:#eee;font-size: 1.1rem;font-weight: bold; color:#111; border: none; outline: none;"
 				>Atras</button
@@ -219,19 +211,20 @@ const deleteProfileFunc = mutation({
 			<button
 				on:click={onSubmit}
 				style="margin: 20px; border-radius: 5px; cursor: pointer; padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;background:#eee;font-size: 1.1rem;font-weight: bold; color:#111; border: none; outline: none;"
-				>{editProfile?"Editar perfil":"Crear Perfil"}</button
+				>{editProfile ? 'Editar perfil' : 'Crear Perfil'}</button
 			>
 		{/if}
 	</nav>
 	{#if newProfile}
 		<div class="containerNew">
-			<h2 style="font-size:2rem; text-align:center;">{editProfile?"Edita el perfil":"Crea un nuevo perfil"}</h2>
+			<h2 style="font-size:2rem; text-align:center;">
+				{editProfile ? 'Edita el perfil' : 'Crea un nuevo perfil'}
+			</h2>
 			<form class="formNew" on:submit|preventDefault={onSubmit}>
 				<input
 					type="text"
 					name="new"
 					class="input"
-					
 					bind:value={profileName}
 					placeholder="Nombre del perfil"
 				/>
@@ -261,24 +254,32 @@ const deleteProfileFunc = mutation({
 							setProfile(Profile.id, Profile.name, Profile.avatar);
 						}}
 					>
-					<button class="delete" title={`eliminar el perfil de ${Profile.name}`} on:click={()=>{
-										profileId = Profile._id
-										profileId2 = Profile.id
-										deleteUserProfile()
-				}}>
+						<button
+							class="delete"
+							title={`eliminar el perfil de ${Profile.name}`}
+							on:click={() => {
+								profileId = Profile._id;
+								profileId2 = Profile.id;
+								deleteUserProfile();
+							}}
+						>
 							<span class="material-icons-round" style="color:white;">delete</span>
 						</button>
 						<img
 							src={Profile.avatar}
 							style="border:{Profile.id === profile ? '3px solid #fff' : 'none'}"
 						/>
-						<button class="edit" title={`Editar el perfil de ${Profile.name}`} on:click={()=>{
-							newProfile = true
-							editProfile = true
-							profileName = Profile.name
-							avatarSelected = Profile.avatar
-							profileId = Profile._id
-						}}>
+						<button
+							class="edit"
+							title={`Editar el perfil de ${Profile.name}`}
+							on:click={() => {
+								newProfile = true;
+								editProfile = true;
+								profileName = Profile.name;
+								avatarSelected = Profile.avatar;
+								profileId = Profile._id;
+							}}
+						>
 							<span class="material-icons-round" style="color:#0a0a0a;">edit</span>
 						</button>
 						<span class="name">{Profile.name}</span>
@@ -299,7 +300,6 @@ const deleteProfileFunc = mutation({
 {/if}
 
 <style type="text/css">
-
 	.container {
 		width: 100%;
 		height: 100%;
@@ -403,7 +403,7 @@ const deleteProfileFunc = mutation({
 		margin: 20px;
 		max-width: 100%;
 	}
-	.formNew{
+	.formNew {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -435,8 +435,8 @@ const deleteProfileFunc = mutation({
 	.avatar:hover {
 		opacity: 0.5;
 	}
-	.delete{
-				position: absolute;
+	.delete {
+		position: absolute;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -453,9 +453,8 @@ const deleteProfileFunc = mutation({
 		border-radius: 50%;
 		border: 3px solid rgb(13, 13, 13);
 		cursor: pointer;
-
 	}
-	.delete:hover{
+	.delete:hover {
 		transform: scale(1.2);
 	}
 	.profile:hover .delete {

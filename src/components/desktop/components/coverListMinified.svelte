@@ -2,44 +2,31 @@
 	export let data;
 </script>
 
-
 <section class="list">
-		{#each data as anime}
-			<div class="item" title={anime.synopsis || anime.animeSynopsis}>
-				<a
-					href={`/anime/${anime.id || anime.animeId}`}
-					class="cover"
-				>
-					<img src={anime.cover || anime.animeCover} class="cover-img" loading="lazy" />
-					<!--<p class="gradient" />-->
-					<div class="actions">
-						<a href={`/anime/${anime.id || anime.animeId}`} class="material-icons-round button">
-							play_circle_outline
-						</a>
-					</div>
-				</a>
-				<div class="info">
-					{#if anime.animeName.length > 23}
-						<a
-							href={`/anime/${anime.animeId}`}
-							class="title"
-						>{anime.animeName.substring(0, 23)}...</a
-						>
-					{:else}
-						<a
-							href={`/anime/${anime.animeId}`}
-							class="title"
-							>{anime.name || anime.animeName}</a
-						>
-					{/if}
-
+	{#each data as anime}
+		<div class="item" title={anime.synopsis || anime.animeSynopsis}>
+			<a href={`/anime/${anime.id || anime.animeId}`} class="cover">
+				<img src={anime.cover || anime.animeCover} class="cover-img" loading="lazy" />
+				<!--<p class="gradient" />-->
+				<div class="actions">
+					<a href={`/anime/${anime.id || anime.animeId}`} class="material-icons-round button">
+						play_circle_outline
+					</a>
 				</div>
+			</a>
+			<div class="info">
+				{#if anime.animeName.length > 23}
+					<a href={`/anime/${anime.animeId}`} class="title">{anime.animeName.substring(0, 23)}...</a
+					>
+				{:else}
+					<a href={`/anime/${anime.animeId}`} class="title">{anime.name || anime.animeName}</a>
+				{/if}
 			</div>
-		{/each}
-	</section>
+		</div>
+	{/each}
+</section>
 
-
-	<style>
+<style>
 	.list {
 		max-width: 100%;
 		margin: 40px;

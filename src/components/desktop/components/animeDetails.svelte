@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	import NavBar from './navbar.svelte';
-	
+
 	import EpisodesList from './EpisodesList.svelte';
 	import cookie from 'cookie-cutter';
 	import { gql, operationStore, query, mutation } from '@urql/svelte';
@@ -40,35 +40,33 @@
 	});
 	const all = operationStore(queryAnimes, { animeId: anime.id, userProfile: profileName });
 
-	
-	
 	let addOrDeleteAnimeInList = async function () {
-			if ($all.data.findAnimeInList.animeId === null) {
-				loading = true;
-				await addAnime({
-					animeId: anime.id,
-					animeName: anime.name,
-					animeSynopsis: anime.synopsis,
-					animeMain: anime.image,
-					animeCover: anime.cover,
-					userProfile: profileName
-				});
+		if ($all.data.findAnimeInList.animeId === null) {
+			loading = true;
+			await addAnime({
+				animeId: anime.id,
+				animeName: anime.name,
+				animeSynopsis: anime.synopsis,
+				animeMain: anime.image,
+				animeCover: anime.cover,
+				userProfile: profileName
+			});
 
-				$all.variables = { animeId: anime.id, userProfile: profileName };
+			$all.variables = { animeId: anime.id, userProfile: profileName };
 
-				all.reexecute({ requestPolicy: 'network-only' });
+			all.reexecute({ requestPolicy: 'network-only' });
 
-				loading = false;
-			} else {
-				loading = true;
-				await deleteAnime({ animeId: $all.data.findAnimeInList._id });
+			loading = false;
+		} else {
+			loading = true;
+			await deleteAnime({ animeId: $all.data.findAnimeInList._id });
 
-				$all.variables = { animeId: anime.id, userProfile: profileName };
-				all.reexecute({ requestPolicy: 'network-only' });
-				loading = false;
-			}
-		};
-	
+			$all.variables = { animeId: anime.id, userProfile: profileName };
+			all.reexecute({ requestPolicy: 'network-only' });
+			loading = false;
+		}
+	};
+
 	query(all);
 </script>
 
@@ -99,7 +97,10 @@
 		{#if profileName === null || profileName === undefined || profileName === 'null'}
 			<div />
 		{:else}
-			<button class="buttonOutlined" style="cursor: {loading?"default":"pointer"};" on:click={addOrDeleteAnimeInList}
+			<button
+				class="buttonOutlined"
+				style="cursor: {loading ? 'default' : 'pointer'};"
+				on:click={addOrDeleteAnimeInList}
 				>{loading || $all.fetching
 					? 'Cargando...'
 					: $all.fetching === false && $all.data.findAnimeInList.animeId === null

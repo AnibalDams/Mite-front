@@ -3,12 +3,12 @@
 
 	let search = '';
 	import cookie from 'cookie-cutter';
-	
+
 	let opacity = 0;
 	let user = cookie.get('user');
 	let profileName = cookie.get('profileName');
 	let profileAvatar = cookie.get('profileAvatar');
-		const queryAnimes = gql`
+	const queryAnimes = gql`
 		query ($user: String!) {
 			findAllProfiles(user: $user) {
 				_id
@@ -20,17 +20,15 @@
 		}
 	`;
 	const all = operationStore(queryAnimes, { user }, { requestPolicy: 'cache-first' });
-	query(all)
-	$: if($all.fetching === false && $all.data.findAllProfiles){
-		let perfil = $all.data.findAllProfiles.find((el)=>el.id === profileName)
-		if(!perfil){
-			profileName = null
+	query(all);
+	$: if ($all.fetching === false && $all.data.findAllProfiles) {
+		let perfil = $all.data.findAllProfiles.find((el) => el.id === profileName);
+		if (!perfil) {
+			profileName = null;
 		}
-	}else{
-		profileName = null
+	} else {
+		profileName = null;
 	}
-
-
 </script>
 
 <nav class="navBar">
@@ -48,8 +46,13 @@
 			href={`/anime/buscar/${search}`}><span class="material-icons-round">search</span></a
 		>
 	</form>
-		
-	<div class="dropDown" style="top: {opacity === 1?90: 80}%;opacity: {opacity};visibility: {opacity === 1?"visible":"hidden"};">
+
+	<div
+		class="dropDown"
+		style="top: {opacity === 1 ? 90 : 80}%;opacity: {opacity};visibility: {opacity === 1
+			? 'visible'
+			: 'hidden'};"
+	>
 		<a class="dropDownOption" href="/milista">Mi Lista</a>
 		<a class="dropDownOption" href="/selectProfile">Cambiar de perfil</a>
 		<a
@@ -59,7 +62,8 @@
 				cookie.set('profileName', null);
 				cookie.set('profileAvatar', null);
 				window.location.reload();
-			}} style="color:red;">Cerrar sesión</a
+			}}
+			style="color:red;">Cerrar sesión</a
 		>
 	</div>
 	{#if profileName === null || profileName === undefined || profileName === 'null'}
@@ -72,7 +76,6 @@
 			<img
 				src={profileAvatar}
 				class="avatar"
-				
 				on:click={() => {
 					if (opacity === 0) {
 						opacity = 1;
@@ -179,7 +182,7 @@
 		border-radius: 5px;
 		margin-top: 10px;
 	}
-	.avatar:hover{
+	.avatar:hover {
 		opacity: 0.5;
 	}
 	.dropDown {

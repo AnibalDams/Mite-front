@@ -28,8 +28,6 @@
 </section>
 
 <style type="text/css">
-	
-
 	.result {
 		display: flex;
 		flex-direction: row;

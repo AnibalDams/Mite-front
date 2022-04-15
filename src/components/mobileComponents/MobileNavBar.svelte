@@ -2,15 +2,13 @@
 	import cookie from 'cookie-cutter';
 	import { gql, operationStore, query, mutation } from '@urql/svelte';
 
-	
 	let opacity = 0;
-
 
 	let user = cookie.get('user');
 	let profileName = cookie.get('profileName');
 	let profileAvatar = cookie.get('profileAvatar');
 
-		const queryAnimes = gql`
+	const queryAnimes = gql`
 		query ($user: String!) {
 			findAllProfiles(user: $user) {
 				_id
@@ -22,21 +20,18 @@
 		}
 	`;
 	const all = operationStore(queryAnimes, { user }, { requestPolicy: 'cache-first' });
-	query(all)
-	$: if($all.fetching === false && $all.data.findAllProfiles){
-		let perfil = $all.data.findAllProfiles.find((el)=>el.id === profileName)
-		if(!perfil){
-			profileName = null
+	query(all);
+	$: if ($all.fetching === false && $all.data.findAllProfiles) {
+		let perfil = $all.data.findAllProfiles.find((el) => el.id === profileName);
+		if (!perfil) {
+			profileName = null;
 		}
-	}else{
-		profileName = null
+	} else {
+		profileName = null;
 	}
 </script>
 
-
-
 <nav>
-	
 	<h1>Descubre</h1>
 	<div class="icons">
 		<!--<a href="#"><span class="material-icons-round">translate</span></a>-->
@@ -47,34 +42,39 @@
 				<a href="/login" class="button"><span class="material-icons-round">account_circle</span></a>
 			</div>
 		{:else}
-		
 			<div class="buttonGroup">
-		
 				<a href="/buscar" class="button"><span class="material-icons-round">search</span></a>
 				<div class="avatarZone" style="position: relative;">
-								<div class="dropDown" style="opacity: {opacity}; visibility: {opacity === 1?"visible":"hidden"};">
-		<a class="dropDownOption" href="/milista">Mi Lista</a>
-		<a class="dropDownOption" href="/selectProfile">Cambiar de perfil</a>
-		<a
-			class="dropDownOption"
-			on:click={() => {
-				cookie.set('user', null);
-				cookie.set('profileName', null);
-				cookie.set('profileAvatar', null);
-				window.location.reload();
-			}} style="color:red;">Cerrar sesión</a
-		>
-	</div>
-					<img src={profileAvatar} class="avatar" on:click={() => {
-					if (opacity === 0) {
-						opacity = 1;
-					} else {
-						opacity = 0;
-					}
-				}}/>
+					<div
+						class="dropDown"
+						style="opacity: {opacity}; visibility: {opacity === 1 ? 'visible' : 'hidden'};"
+					>
+						<a class="dropDownOption" href="/milista">Mi Lista</a>
+						<a class="dropDownOption" href="/selectProfile">Cambiar de perfil</a>
+						<a
+							class="dropDownOption"
+							on:click={() => {
+								cookie.set('user', null);
+								cookie.set('profileName', null);
+								cookie.set('profileAvatar', null);
+								window.location.reload();
+							}}
+							style="color:red;">Cerrar sesión</a
+						>
+					</div>
+					<img
+						src={profileAvatar}
+						class="avatar"
+						on:click={() => {
+							if (opacity === 0) {
+								opacity = 1;
+							} else {
+								opacity = 0;
+							}
+						}}
+					/>
 				</div>
 			</div>
-
 		{/if}
 	</div>
 </nav>
@@ -91,7 +91,7 @@
 		object-fit: cover;
 		cursor: pointer;
 	}
-	.avatar:hover{
+	.avatar:hover {
 		opacity: 0.5;
 	}
 	nav {
@@ -121,7 +121,6 @@
 		align-items: center;
 	}
 	.dropDown {
-
 		position: absolute;
 		width: 150px;
 		height: 180px;
