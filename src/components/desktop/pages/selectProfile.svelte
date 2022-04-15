@@ -135,10 +135,13 @@ const deleteProfileFunc = mutation({
 			newProfile = false
 			editProfile = false
 			profileName = "";
+
+		cookie.set('profileAvatar', avatarSelected);
 		$all.variables = { user };
 
 		all.reexecute({ requestPolicy: 'network-only' });
 		profileId =""
+
 
 		} else if (profileName.length >= 15) {
 			toast.push('El nombre no puede ser mayor a 15 caracteres.', {
@@ -456,7 +459,7 @@ const deleteProfileFunc = mutation({
 		transform: scale(1.2);
 	}
 	.profile:hover .delete {
-		top: 0;
+		top: 2%;
 		opacity: 1;
 		visibility: visible;
 	}

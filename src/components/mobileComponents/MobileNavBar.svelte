@@ -1,11 +1,36 @@
 <script>
 	import cookie from 'cookie-cutter';
+	import { gql, operationStore, query, mutation } from '@urql/svelte';
+
 	
 	let opacity = 0;
 
 
+	let user = cookie.get('user');
 	let profileName = cookie.get('profileName');
 	let profileAvatar = cookie.get('profileAvatar');
+
+		const queryAnimes = gql`
+		query ($user: String!) {
+			findAllProfiles(user: $user) {
+				_id
+				id
+				name
+				avatar
+				user
+			}
+		}
+	`;
+	const all = operationStore(queryAnimes, { user }, { requestPolicy: 'cache-first' });
+	query(all)
+	$: if($all.fetching === false && $all.data.findAllProfiles){
+		let perfil = $all.data.findAllProfiles.find((el)=>el.id === profileName)
+		if(!perfil){
+			profileName = null
+		}
+	}else{
+		profileName = null
+	}
 </script>
 
 
