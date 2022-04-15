@@ -26,6 +26,7 @@
 			let perfil = $all.data.findAllProfiles.find((el) => el.id === profileName);
 		if (!perfil) {
 			profileName = null;
+			cookie.set('profileName',null)
 		}	
 		}
 		
