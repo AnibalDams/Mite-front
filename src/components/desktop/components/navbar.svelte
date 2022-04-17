@@ -21,7 +21,7 @@
 	`;
 	const all = operationStore(queryAnimes, { user }, { requestPolicy: 'cache-first' });
 	query(all);
-	$: if ($all.fetching === false ) {
+	 if ($all.fetching === false ) {
 		if($all.data.findAllProfiles){
 			let perfil = $all.data.findAllProfiles.find((el) => el.id === profileName);
 		if (!perfil) {
